@@ -15,12 +15,12 @@ class User(db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False)
     password_hash = db.Column(db.String(128), nullable=False)
 
-# Initialize DB (run once)
-@app.before_first_request
-def create_tables():
-    db.create_all()
+# Create tables before starting app
+if __name__ == "__main__":
+    with app.app_context():
+        db.create_all()
+    app.run(debug=True)
 
-# Registration route
 @app.route('/register', methods=['POST'])
 def register():
     data = request.json
@@ -40,6 +40,3 @@ def register():
     db.session.commit()
 
     return jsonify({'message': 'User registered successfully'}), 201
-
-if __name__ == "__main__":
-    app.run(debug=True)
