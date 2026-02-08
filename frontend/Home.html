@@ -3,43 +3,107 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>My Website</title>
+  <title>My Ultimate Website</title>
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Pacifico&display=swap" rel="stylesheet" />
+  
   <style>
+    /* Background gradient animation */
+    @keyframes gradientBG {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      margin: 40px;
-      background: #f4f4f4;
+      font-family: 'Poppins', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background: linear-gradient(-45deg, #6a11cb, #2575fc, #ff758c, #ff7eb3);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       text-align: center;
     }
+
     header {
-      background: #007bff;
-      color: white;
-      padding: 20px;
-      border-radius: 5px;
+      font-family: 'Pacifico', cursive;
+      font-size: 3.5rem;
+      text-shadow: 0 0 10px rgba(0,0,0,0.3);
+      margin-bottom: 1rem;
+      user-select: none;
     }
+
     main {
-      margin-top: 30px;
+      max-width: 600px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 15px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      color: #fff;
+      font-size: 1.2rem;
+      line-height: 1.6;
     }
+
     a.button {
       display: inline-block;
-      padding: 10px 20px;
-      background: #007bff;
-      color: white;
+      margin-top: 30px;
+      padding: 14px 30px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #6a11cb;
+      background: #fff;
+      border-radius: 50px;
+      box-shadow: 0 4px 15px rgba(255, 255, 255, 0.6);
       text-decoration: none;
-      border-radius: 3px;
-      margin-top: 20px;
+      transition: all 0.3s ease;
+      user-select: none;
     }
+
     a.button:hover {
-      background: #0056b3;
+      background: #6a11cb;
+      color: #fff;
+      box-shadow: 0 6px 20px rgba(106, 17, 203, 0.8);
+      transform: translateY(-3px);
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      header {
+        font-size: 2.5rem;
+      }
+
+      main {
+        font-size: 1rem;
+        margin: 10px;
+      }
+
+      a.button {
+        padding: 12px 25px;
+        font-size: 1rem;
+      }
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Welcome to My Website</h1>
-  </header>
+  <header>Welcome to My Ultimate Website</header>
   <main>
-    <p>This is a simple homepage created for your project.</p>
+    <p>Experience the power of beautiful design with smooth animations, elegant fonts, and a vibrant gradient background.</p>
+    <p>This is the perfect starting point for your amazing project. Customize it and make it truly yours!</p>
     <a href="#" class="button">Get Started</a>
   </main>
 </body>
