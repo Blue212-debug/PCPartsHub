@@ -91,13 +91,39 @@
 <body>
   <div class="create-container">
     <h2>Create Account</h2>
-    <form>
-      <input type="text" placeholder="Username" required />
-      <input type="email" placeholder="Email" required />
-      <input type="password" placeholder="Password" required />
-      <input type="password" placeholder="Confirm Password" required />
-      <button type="submit" class="create-btn">Create Account</button>
-    </form>
+    <form id="createForm">
+  <input type="text" placeholder="Username" id="createUsername" required>
+  <input type="email" placeholder="Email" id="createEmail" required>
+  <input type="password" placeholder="Password" id="createPassword" required>
+  <button type="submit" class="create-btn">Create Account</button>
+</form>
+
+<script>
+  const createForm = document.getElementById('createForm');
+
+  createForm.addEventListener('submit', function(e) {
+    e.preventDefault(); // prevent page refresh
+
+    const username = document.getElementById('createUsername').value.trim();
+    const email = document.getElementById('createEmail').value.trim();
+    const password = document.getElementById('createPassword').value;
+
+    if (!username || !email || !password) {
+      alert("All fields are required!");
+      return;
+    }
+
+    // Save account to localStorage
+    const account = { username, email, password };
+    localStorage.setItem(email, JSON.stringify(account));
+
+    alert("Account created successfully!");
+    createForm.reset();
+    // Redirect to login page
+    window.location.href = "login.html";
+  });
+</script>
+
     <button class="back-btn" onclick="window.location.href='login.html'">Back to Login</button>
   </div>
 </body>
