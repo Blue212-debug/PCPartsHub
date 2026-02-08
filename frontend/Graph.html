@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Real-time CPU & RAM Prices</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <canvas id="priceChart" width="800" height="400"></canvas>
+
+  <script>
+    const ctx = document.getElementById('priceChart').getContext('2d');
+    const cpuPrices = [];
+    const ramPrices = [];
+    const labels = [];
+
+    const chart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: 'CPU Price ($)',
+            borderColor: 'blue',
+            data: cpuPrices,
+            fill: false,
+            tension: 0.2
+          },
+          {
+            label: 'RAM Price ($)',
+            borderColor: 'green',
+            data: ramPrices,
+            fill: false,
+            tension: 0.2
+          }
+        ],
+      },
+      options: {
+        scales: {
+          x: {
+            type: 'time',
+            time: { unit: 'minute', displayFormats: { minute: 'HH:mm:ss' } },
+            title: { display: true, text: 'Time' }
+          },
+          y: {
+            beginAtZero: true,
+            title: { display: true, text: 'Price ($)' }
+          }
+        },
+        animation: false,
+        responsive: true,
+        maintainAspectRatio: false,
+      },
+    });
+
+    function fetchPrices() {
+      const now = new Date();
+      labels.push(now);
+
+      // Simulated prices, replace with actual fetch calls to your API
+      cpuPrices.push(200 + Math.random() * 10);
+      ramPrices.push(80 + Math.random() * 5);
+
+      // Keep only last 20 points
+      if (labels.length > 20) {
+        labels.shift();
+        cpuPrices.shift();
+        ramPrices.shift();
+      }
+
+      chart.update();
+    }
+
+    setInterval(fetchPrices, 10000); // Update every 10 seconds
+    fetchPrices();
+  </script>
+</body>
+</html>

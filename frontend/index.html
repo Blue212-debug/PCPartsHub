@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PC Builder Pro</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PCPartsHub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
       --bg: #0b0e14;
@@ -17,13 +17,44 @@
       --radius: 14px;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     body {
       font-family: 'Inter', system-ui, sans-serif;
       background: radial-gradient(1200px 600px at 20% -10%, #16204a, transparent), var(--bg);
       color: var(--text);
       min-height: 100vh;
+    }
+
+    .top-bar {
+      background: var(--panel-2);
+      padding: 10px 40px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      border-bottom: 1px solid #1c2340;
+      gap: 12px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .profile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+
+    .profile img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+      object-fit: cover;
     }
 
     header {
@@ -38,6 +69,7 @@
       font-size: 22px;
       font-weight: 600;
       letter-spacing: 0.3px;
+      user-select: none;
     }
 
     .budget {
@@ -87,7 +119,9 @@
       border-bottom: 1px solid #1d2440;
     }
 
-    .row:last-child { border-bottom: none; }
+    .row:last-child {
+      border-bottom: none;
+    }
 
     .label {
       font-size: 14px;
@@ -109,6 +143,34 @@
       text-align: right;
       font-size: 14px;
       color: var(--muted);
+    }
+
+    /* New button style */
+    .show-graph-btn {
+      margin-top: 20px;
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #4f7cff, #6fa3ff);
+      border: none;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      color: white;
+      cursor: pointer;
+    }
+
+    .show-graph-btn:hover {
+      filter: brightness(1.05);
+    }
+
+    /* Container for the chart */
+    #priceGraphContainer {
+      margin-top: 24px;
+      background: var(--panel);
+      border-radius: var(--radius);
+      padding: 20px;
+      display: none;
+      height: 400px;
     }
 
     .summary {
@@ -179,80 +241,176 @@
 </head>
 <body>
 
-<header>
-  <h1>PC Builder Pro</h1>
-  <div class="budget">
-    Budget $
-    <input type="number" value="1200" />
+  <div class="top-bar">
+    <div class="profile" title="Ahmed">
+      <img src="https://i.pravatar.cc/32" alt="Profile" />
+      Ahmed
+    </div>
   </div>
-</header>
 
-<main>
-  <section class="parts">
-    <h2>Build Configuration</h2>
-
-    <div class="row">
-      <div class="label">CPU</div>
-      <select><option>Select CPU</option></select>
-      <div class="price">—</div>
+  <header>
+    <h1>PCPartsHub</h1>
+    <div class="budget">
+      Budget $
+      <input type="number" value="1200" />
     </div>
+  </header>
 
-    <div class="row">
-      <div class="label">Motherboard</div>
-      <select><option>Select Motherboard</option></select>
-      <div class="price">—</div>
-    </div>
+  <main>
+    <section class="parts">
+      <h2>Build Configuration</h2>
 
-    <div class="row">
-      <div class="label">Graphics Card</div>
-      <select><option>Select GPU</option></select>
-      <div class="price">—</div>
-    </div>
+      <div class="row">
+        <div class="label">CPU</div>
+        <select><option>Select CPU</option></select>
+        <div class="price">—</div>
+      </div>
 
-    <div class="row">
-      <div class="label">Memory</div>
-      <select><option>Select RAM</option></select>
-      <div class="price">—</div>
-    </div>
+      <div class="row">
+        <div class="label">Motherboard</div>
+        <select><option>Select Motherboard</option></select>
+        <div class="price">—</div>
+      </div>
 
-    <div class="row">
-      <div class="label">Storage</div>
-      <select><option>Select Storage</option></select>
-      <div class="price">—</div>
-    </div>
+      <div class="row">
+        <div class="label">Graphics Card</div>
+        <select><option>Select GPU</option></select>
+        <div class="price">—</div>
+      </div>
 
-    <div class="row">
-      <div class="label">Power Supply</div>
-      <select><option>Select PSU</option></select>
-      <div class="price">—</div>
-    </div>
+      <div class="row">
+        <div class="label">Memory</div>
+        <select><option>Select RAM</option></select>
+        <div class="price">—</div>
+      </div>
 
-    <div class="row">
-      <div class="label">Case</div>
-      <select><option>Select Case</option></select>
-      <div class="price">—</div>
-    </div>
-  </section>
+      <div class="row">
+        <div class="label">Storage</div>
+        <select><option>Select Storage</option></select>
+        <div class="price">—</div>
+      </div>
 
-  <aside class="summary">
-    <h2>Summary</h2>
-    <div class="total">
-      <span>Total</span>
-      <span>$0</span>
-    </div>
+      <div class="row">
+        <div class="label">Power Supply</div>
+        <select><option>Select PSU</option></select>
+        <div class="price">—</div>
+      </div>
 
-    <div class="status">
-      Compatibility: <span>Issues detected</span><br />
-      Estimated Power Draw: — W
-    </div>
+      <div class="row">
+        <div class="label">Case</div>
+        <select><option>Select Case</option></select>
+        <div class="price">—</div>
+      </div>
 
-    <button>Check Compatibility</button>
-  </aside>
-</main>
+      <button id="toggleGraphBtn" class="show-graph-btn">Show Price Graph</button>
 
-<footer>
-  PC Builder Pro — UI Prototype
-</footer>
+      <div id="priceGraphContainer">
+        <canvas id="priceChart" style="width: 100%; height: 100%;"></canvas>
+      </div>
+    </section>
 
+    <aside class="summary">
+      <h2>Summary</h2>
+      <div class="total">
+        <span>Total</span>
+        <span>$0</span>
+      </div>
+
+      <div class="status">
+        Compatibility: <span>Issues detected</span><br />
+        Estimated Power Draw: — W
+      </div>
+
+      <button>Check Compatibility</button>
+    </aside>
+  </main>
+
+  <footer>
+    PC Builder Pro — UI Prototype
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const toggleBtn = document.getElementById('toggleGraphBtn');
+    const graphContainer = document.getElementById('priceGraphContainer');
+    let graphVisible = false;
+    let intervalId = null;
+
+    // Chart.js setup
+    const ctx = document.getElementById('priceChart').getContext('2d');
+    const cpuPrices = [];
+    const ramPrices = [];
+    const labels = [];
+
+    const chart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: 'CPU Price ($)',
+            borderColor: 'blue',
+            data: cpuPrices,
+            fill: false,
+            tension: 0.2
+          },
+          {
+            label: 'RAM Price ($)',
+            borderColor: 'green',
+            data: ramPrices,
+            fill: false,
+            tension: 0.2
+          }
+        ],
+      },
+      options: {
+        scales: {
+          x: {
+            type: 'time',
+            time: { unit: 'minute', displayFormats: { minute: 'HH:mm:ss' } },
+            title: { display: true, text: 'Time' }
+          },
+          y: {
+            beginAtZero: true,
+            title: { display: true, text: 'Price ($)' }
+          }
+        },
+        animation: false,
+        responsive: true,
+        maintainAspectRatio: false,
+      },
+    });
+
+    function fetchPrices() {
+      const now = new Date();
+      labels.push(now);
+
+      // Simulated prices, replace with actual fetch calls to your API
+      cpuPrices.push(200 + Math.random() * 10);
+      ramPrices.push(80 + Math.random() * 5);
+
+      if (labels.length > 20) {
+        labels.shift();
+        cpuPrices.shift();
+        ramPrices.shift();
+      }
+
+      chart.update();
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      graphVisible = !graphVisible;
+      if (graphVisible) {
+        graphContainer.style.display = 'block';
+        toggleBtn.textContent = 'Hide Price Graph';
+        fetchPrices();
+        intervalId = setInterval(fetchPrices, 10000);
+      } else {
+        graphContainer.style.display = 'none';
+        toggleBtn.textContent = 'Show Price Graph';
+        clearInterval(intervalId);
+      }
+    });
+  </script>
 </body>
 </html>
