@@ -1,17 +1,13 @@
-from flask import Flask, send_from_directory, redirect
-
-import os
+from flask import Flask, render_template_string
 
 app = Flask(__name__)
-BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+
+with open("home.html") as f:
+    html_content = f.read()
 
 @app.route("/")
-def root():
-    return redirect("/home.html")
-
-@app.route('/<path:filename>')
-def serve_file(filename):
-    return send_from_directory(BASE_DIR, filename)
+def home():
+    return render_template_string(html_content)
 
 if __name__ == "__main__":
     app.run(debug=True)
