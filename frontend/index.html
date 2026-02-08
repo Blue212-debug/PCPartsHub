@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PC Builder Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0e14;
+      --panel: #121723;
+      --panel-2: #161c2e;
+      --accent: #4f7cff;
+      --text: #e6e8ee;
+      --muted: #9aa1b2;
+      --danger: #ff5c5c;
+      --radius: 14px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: radial-gradient(1200px 600px at 20% -10%, #16204a, transparent), var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    header {
+      padding: 28px 40px;
+      border-bottom: 1px solid #1c2340;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+
+    .budget {
+      background: var(--panel);
+      padding: 10px 16px;
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+    }
+
+    .budget input {
+      background: transparent;
+      border: none;
+      color: var(--text);
+      width: 90px;
+      font-size: 14px;
+      outline: none;
+    }
+
+    main {
+      padding: 40px;
+      display: grid;
+      grid-template-columns: 2.5fr 1fr;
+      gap: 32px;
+    }
+
+    .parts {
+      background: var(--panel);
+      border-radius: var(--radius);
+      padding: 28px;
+    }
+
+    .parts h2 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 140px 1fr 120px;
+      gap: 16px;
+      align-items: center;
+      padding: 14px 0;
+      border-bottom: 1px solid #1d2440;
+    }
+
+    .row:last-child { border-bottom: none; }
+
+    .label {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    select {
+      background: var(--panel-2);
+      border: 1px solid #222b52;
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-size: 14px;
+      outline: none;
+      appearance: none;
+    }
+
+    .price {
+      text-align: right;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .summary {
+      background: var(--panel);
+      border-radius: var(--radius);
+      padding: 28px;
+      height: fit-content;
+    }
+
+    .summary h2 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .total {
+      display: flex;
+      justify-content: space-between;
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .status {
+      background: #13203f;
+      border: 1px solid #23336d;
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .status span {
+      color: var(--danger);
+      font-weight: 500;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #4f7cff, #6fa3ff);
+      border: none;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      filter: brightness(1.05);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    @media (max-width: 900px) {
+      main {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>PC Builder Pro</h1>
+  <div class="budget">
+    Budget $
+    <input type="number" value="1200" />
+  </div>
+</header>
+
+<main>
+  <section class="parts">
+    <h2>Build Configuration</h2>
+
+    <div class="row">
+      <div class="label">CPU</div>
+      <select><option>Select CPU</option></select>
+      <div class="price">—</div>
+    </div>
+
+    <div class="row">
+      <div class="label">Motherboard</div>
+      <select><option>Select Motherboard</option></select>
+      <div class="price">—</div>
+    </div>
+
+    <div class="row">
+      <div class="label">Graphics Card</div>
+      <select><option>Select GPU</option></select>
+      <div class="price">—</div>
+    </div>
+
+    <div class="row">
+      <div class="label">Memory</div>
+      <select><option>Select RAM</option></select>
+      <div class="price">—</div>
+    </div>
+
+    <div class="row">
+      <div class="label">Storage</div>
+      <select><option>Select Storage</option></select>
+      <div class="price">—</div>
+    </div>
+
+    <div class="row">
+      <div class="label">Power Supply</div>
+      <select><option>Select PSU</option></select>
+      <div class="price">—</div>
+    </div>
+
+    <div class="row">
+      <div class="label">Case</div>
+      <select><option>Select Case</option></select>
+      <div class="price">—</div>
+    </div>
+  </section>
+
+  <aside class="summary">
+    <h2>Summary</h2>
+    <div class="total">
+      <span>Total</span>
+      <span>$0</span>
+    </div>
+
+    <div class="status">
+      Compatibility: <span>Issues detected</span><br />
+      Estimated Power Draw: — W
+    </div>
+
+    <button>Check Compatibility</button>
+  </aside>
+</main>
+
+<footer>
+  PC Builder Pro — UI Prototype
+</footer>
+
+</body>
+</html>
