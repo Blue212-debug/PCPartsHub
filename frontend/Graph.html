@@ -1,78 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Real-time CPU & RAM Prices</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Graphs</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0b0e14;
+    --panel: #121723;
+    --panel-2: #161c2e;
+    --accent: #4f7cff;
+    --text: #e6e8ee;
+    --muted: #9aa1b2;
+    --radius: 14px;
+  }
+  * {
+    margin: 0; padding: 0; box-sizing: border-box;
+  }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+  .top-bar {
+    background: var(--panel-2);
+    padding: 12px 40px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    border-bottom: 1px solid #1c2340;
+  }
+  .profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--muted);
+    cursor: pointer;
+  }
+  .profile img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+  }
+  header {
+    background: var(--panel);
+    padding: 20px 40px;
+    border-bottom: 1px solid #1c2340;
+  }
+  header h1 {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    user-select: none;
+  }
+  nav {
+    background: var(--panel-2);
+    padding: 10px 40px;
+    display: flex;
+    gap: 30px;
+    border-bottom: 1px solid #1c2340;
+  }
+  nav a {
+    text-decoration: none;
+    color: var(--muted);
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: 10px;
+    transition: background 0.2s;
+  }
+  nav a.active, nav a:hover {
+    background: var(--accent);
+    color: #fff;
+  }
+  main {
+    padding: 40px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .title {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .title h1 {
+    margin-bottom: 8px;
+  }
+  .title p {
+    color: var(--muted);
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+    gap: 35px;
+    justify-items: center;
+  }
+  .card {
+    background: var(--panel);
+    padding: 40px 30px;
+    border-radius: var(--radius);
+    border: 1px solid #1c2340;
+    text-align: center;
+    width: 280px;
+  }
+  .card h3 {
+    margin-bottom: 20px;
+    font-size: 22px;
+  }
+  .card p {
+    color: var(--muted);
+    font-size: 18px;
+    font-weight: 600;
+  }
+</style>
 </head>
 <body>
-  <canvas id="priceChart" width="800" height="400"></canvas>
 
-  <script>
-    const ctx = document.getElementById('priceChart').getContext('2d');
-    const cpuPrices = [];
-    const ramPrices = [];
-    const labels = [];
+  <div class="top-bar">
+    <div class="profile" title="Ahmed">
+      Ahmed
+      <img src="https://i.pravatar.cc/32" alt="Profile" />
+    </div>
+  </div>
 
-    const chart = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: labels,
-        datasets: [
-          {
-            label: 'CPU Price ($)',
-            borderColor: 'blue',
-            data: cpuPrices,
-            fill: false,
-            tension: 0.2
-          },
-          {
-            label: 'RAM Price ($)',
-            borderColor: 'green',
-            data: ramPrices,
-            fill: false,
-            tension: 0.2
-          }
-        ],
-      },
-      options: {
-        scales: {
-          x: {
-            type: 'time',
-            time: { unit: 'minute', displayFormats: { minute: 'HH:mm:ss' } },
-            title: { display: true, text: 'Time' }
-          },
-          y: {
-            beginAtZero: true,
-            title: { display: true, text: 'Price ($)' }
-          }
-        },
-        animation: false,
-        responsive: true,
-        maintainAspectRatio: false,
-      },
-    });
+  <header>
+    <h1>PCPartsHub</h1>
+  </header>
 
-    function fetchPrices() {
-      const now = new Date();
-      labels.push(now);
+  <nav>
+    <a href="index.html">Builder Catalogue</a>
+    <a href="pcready.html">PC Catalogue</a>
+    <a href="graph.html" class="active">Graphs</a>
+  </nav>
 
-      // Simulated prices, replace with actual fetch calls to your API
-      cpuPrices.push(200 + Math.random() * 10);
-      ramPrices.push(80 + Math.random() * 5);
+  <main>
+    <div class="title">
+      <h1>System Graphs</h1>
+      <p>No graphs available now</p>
+    </div>
 
-      // Keep only last 20 points
-      if (labels.length > 20) {
-        labels.shift();
-        cpuPrices.shift();
-        ramPrices.shift();
-      }
+    <div class="grid">
+      <div class="card">
+        <h3>CPU</h3>
+        <p>No data available</p>
+      </div>
+      <div class="card">
+        <h3>GPU</h3>
+        <p>No data available</p>
+      </div>
+      <div class="card">
+        <h3>RAM</h3>
+        <p>No data available</p>
+      </div>
+      <div class="card">
+        <h3>SSD</h3>
+        <p>No data available</p>
+      </div>
+    </div>
+  </main>
 
-      chart.update();
-    }
-
-    setInterval(fetchPrices, 10000); // Update every 10 seconds
-    fetchPrices();
-  </script>
 </body>
 </html>
