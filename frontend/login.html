@@ -109,11 +109,40 @@
 <body>
   <div class="login-container">
     <h2>Login</h2>
-    <form>
-      <input type="text" placeholder="Username" required>
-      <input type="password" placeholder="Password" required>
-      <button type="submit" class="login-btn">Login</button>
-    </form>
+    <form id="loginForm">
+  <input type="text" placeholder="Username or Email" id="loginEmail" required>
+  <input type="password" placeholder="Password" id="loginPassword" required>
+  <button type="submit" class="login-btn">Login</button>
+</form>
+
+<script>
+  const loginForm = document.getElementById('loginForm');
+
+  loginForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const email = document.getElementById('loginEmail').value.trim();
+    const password = document.getElementById('loginPassword').value;
+
+    const storedAccount = localStorage.getItem(email);
+    if (!storedAccount) {
+      alert("No account found with this email!");
+      return;
+    }
+
+    const account = JSON.parse(storedAccount);
+    if (password !== account.password) {
+      alert("Incorrect password!");
+      return;
+    }
+
+    alert(`Welcome back, ${account.username}!`);
+    loginForm.reset();
+    // Redirect to dashboard or main page
+    window.location.href = "dashboard.html"; // create this next
+  });
+</script>
+
 
     <div class="divider"></div>
 
