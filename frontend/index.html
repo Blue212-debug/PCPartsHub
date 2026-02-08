@@ -32,43 +32,36 @@
       min-height: 100vh;
     }
 
-    /* Top bar */
-
     .top-bar {
-  background: var(--panel-2);
-  padding: 10px 40px;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  border-bottom: 1px solid #1c2340;
-  gap: 12px;
-  font-size: 14px;
-  color: var(--muted);
+      background: var(--panel-2);
+      padding: 10px 40px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      border-bottom: 1px solid #1c2340;
+      gap: 12px;
+      font-size: 14px;
+      color: var(--muted);
+      height: 60px;
+      box-sizing: border-box;
+    }
 
-  /* Add these: */
-  height: 60px;
-  box-sizing: border-box;
-}
+    .profile {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      font-size: 14px;
+      color: var(--muted);
+    }
 
-.profile {
-  display: flex;
-  align-items: center;
-  gap: 12px; /* increase spacing a bit */
-  cursor: pointer;
-  font-size: 14px;
-  color: var(--muted);
-}
-
-.profile img {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  border: 2px solid var(--accent);
-  object-fit: cover;
-}
-
-
-    /* Header */
+    .profile img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+      object-fit: cover;
+    }
 
     header {
       padding: 28px 40px;
@@ -90,6 +83,7 @@
       display: flex;
       gap: 10px;
       font-size: 14px;
+      align-items: center;
     }
 
     .budget input {
@@ -98,9 +92,9 @@
       color: var(--text);
       width: 90px;
       outline: none;
+      font-size: 14px;
+      text-align: right;
     }
-
-    /* Navigation */
 
     .nav-bar {
       display: flex;
@@ -130,8 +124,6 @@
       color: white;
     }
 
-    /* Main */
-
     main {
       padding: 40px;
       display: grid;
@@ -157,11 +149,29 @@
       padding: 14px 0;
       border-bottom: 1px solid #1d2440;
       align-items: center;
+      position: relative;
     }
 
     .label {
       color: var(--muted);
       font-size: 14px;
+      position: relative;
+      cursor: help;
+    }
+
+    .label[data-tooltip]:hover::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: 120%;
+      left: 0;
+      background: var(--panel-2);
+      color: var(--text);
+      padding: 6px 10px;
+      border-radius: 8px;
+      font-size: 12px;
+      white-space: nowrap;
+      box-shadow: 0 0 8px rgba(0,0,0,0.5);
+      z-index: 10;
     }
 
     select {
@@ -171,11 +181,13 @@
       padding: 10px;
       border-radius: 10px;
       outline: none;
+      font-size: 14px;
     }
 
     .price {
       text-align: right;
       color: var(--muted);
+      font-size: 14px;
     }
 
     button {
@@ -188,18 +200,20 @@
       font-weight: 600;
       color: white;
       cursor: pointer;
+      font-size: 14px;
+      user-select: none;
     }
 
     button:hover {
       filter: brightness(1.1);
     }
 
-    /* Summary */
-
     .summary {
       background: var(--panel);
       border-radius: var(--radius);
       padding: 28px;
+      display: flex;
+      flex-direction: column;
     }
 
     .summary h2 {
@@ -222,6 +236,18 @@
       font-size: 13px;
       color: var(--muted);
       margin-bottom: 20px;
+      white-space: pre-line;
+      min-height: 56px;
+    }
+
+    .buttons-row {
+      display: flex;
+      gap: 12px;
+    }
+
+    .buttons-row button {
+      width: 50%;
+      margin: 0;
     }
 
     footer {
@@ -235,13 +261,17 @@
       main {
         grid-template-columns: 1fr;
       }
+      .buttons-row {
+        flex-direction: column;
+      }
+      .buttons-row button {
+        width: 100%;
+      }
     }
   </style>
 </head>
 
 <body>
-
-  <!-- Top bar -->
 
   <div class="top-bar">
     <div class="profile">
@@ -250,18 +280,14 @@
     </div>
   </div>
 
-  <!-- Header -->
-
   <header>
     <h1>PCPartsHub</h1>
 
     <div class="budget">
-      Budget $
-      <input type="number" value="1200">
+      Budget DH
+      <input type="number" id="budgetInput" value="1200" min="0" />
     </div>
   </header>
-
-  <!-- Navigation -->
 
   <nav class="nav-bar">
     <a href="index.html" class="nav-item active">Builder</a>
@@ -269,57 +295,54 @@
     <a href="graph.html" class="nav-item">Graphs</a>
   </nav>
 
-  <!-- Main -->
-
   <main>
-
     <section class="parts">
 
       <h2>Build Configuration</h2>
 
       <div class="row">
-        <div class="label">CPU</div>
-        <select><option>Select CPU</option></select>
-        <div class="price">—</div>
+        <div class="label" data-tooltip="Central Processing Unit - the brain of your PC.">CPU</div>
+        <select id="cpuSelect"></select>
+        <div class="price" id="cpuPrice">—</div>
       </div>
 
       <div class="row">
-        <div class="label">Motherboard</div>
-        <select><option>Select Motherboard</option></select>
-        <div class="price">—</div>
+        <div class="label" data-tooltip="Mainboard that connects all components.">Motherboard</div>
+        <select id="mbSelect"></select>
+        <div class="price" id="mbPrice">—</div>
       </div>
 
       <div class="row">
-        <div class="label">GPU</div>
-        <select><option>Select GPU</option></select>
-        <div class="price">—</div>
+        <div class="label" data-tooltip="Graphics Processing Unit for visuals and gaming.">GPU</div>
+        <select id="gpuSelect"></select>
+        <div class="price" id="gpuPrice">—</div>
       </div>
 
       <div class="row">
-        <div class="label">RAM</div>
-        <select><option>Select RAM</option></select>
-        <div class="price">—</div>
+        <div class="label" data-tooltip="Memory modules for running programs fast.">RAM</div>
+        <select id="ramSelect"></select>
+        <div class="price" id="ramPrice">—</div>
       </div>
 
       <div class="row">
-        <div class="label">Storage</div>
-        <select><option>Select Storage</option></select>
-        <div class="price">—</div>
+        <div class="label" data-tooltip="Storage devices like SSD or HDD.">Storage</div>
+        <select id="storageSelect"></select>
+        <div class="price" id="storagePrice">—</div>
       </div>
 
       <div class="row">
-        <div class="label">PSU</div>
-        <select><option>Select PSU</option></select>
-        <div class="price">—</div>
+        <div class="label" data-tooltip="Power Supply Unit - supplies power to components.">PSU</div>
+        <select id="psuSelect"></select>
+        <div class="price" id="psuPrice">—</div>
       </div>
 
       <div class="row">
-        <div class="label">Case</div>
-        <select><option>Select Case</option></select>
-        <div class="price">—</div>
+        <div class="label" data-tooltip="PC Case - houses all your components.">Case</div>
+        <select id="caseSelect"></select>
+        <div class="price" id="casePrice">—</div>
       </div>
 
-      <button>Save Build</button>
+      <button id="saveBuildBtn">Save Build</button>
 
     </section>
 
@@ -329,15 +352,18 @@
 
       <div class="total">
         <span>Total</span>
-        <span>$0</span>
+        <span id="totalPrice">0 DH</span>
       </div>
 
-      <div class="status">
-        Compatibility: <span>Issues detected</span><br>
+      <div class="status" id="compatibilityStatus">
+        Compatibility: <span>—</span><br>
         Power Draw: — W
       </div>
 
-      <button>Check Compatibility</button>
+      <div class="buttons-row">
+        <button id="checkCompatBtn">Check Compatibility</button>
+        <button id="resetBuildBtn" style="background: var(--danger)">Clear Build</button>
+      </div>
 
     </aside>
 
@@ -346,6 +372,246 @@
   <footer>
     PCPartsHub — Builder Platform
   </footer>
+
+  <script>
+    (() => {
+      // Sample data with prices, socket types, power, and compatibility info
+      const partsData = {
+        cpu: [
+          { id: 'none', name: 'Select CPU', price: 0, socket: null, power: 0 },
+          { id: 'intel_i5', name: 'Intel i5-11400F', price: 1500, socket: 'LGA1200', power: 65 },
+          { id: 'intel_i7', name: 'Intel i7-11700K', price: 2800, socket: 'LGA1200', power: 125 },
+          { id: 'amd_ryzen5', name: 'AMD Ryzen 5 5600X', price: 2200, socket: 'AM4', power: 65 },
+          { id: 'amd_ryzen7', name: 'AMD Ryzen 7 5800X', price: 3500, socket: 'AM4', power: 105 },
+        ],
+        motherboard: [
+          { id: 'none', name: 'Select Motherboard', price: 0, socket: null, ramType: null },
+          { id: 'mb_asus_lga1200', name: 'ASUS Prime LGA1200', price: 1200, socket: 'LGA1200', ramType: 'DDR4' },
+          { id: 'mb_msi_am4', name: 'MSI Tomahawk AM4', price: 1300, socket: 'AM4', ramType: 'DDR4' },
+          { id: 'mb_gigabyte_lga1200', name: 'Gigabyte Ultra LGA1200', price: 1700, socket: 'LGA1200', ramType: 'DDR4' },
+          { id: 'mb_asrock_am4', name: 'ASRock B550 AM4', price: 1500, socket: 'AM4', ramType: 'DDR4' },
+        ],
+        gpu: [
+          { id: 'none', name: 'Select GPU', price: 0, power: 0 },
+          { id: 'nvidia_3060', name: 'NVIDIA RTX 3060', price: 3500, power: 170 },
+          { id: 'nvidia_3070', name: 'NVIDIA RTX 3070', price: 5000, power: 220 },
+          { id: 'amd_rx6600', name: 'AMD RX 6600', price: 3200, power: 160 },
+          { id: 'amd_rx6700', name: 'AMD RX 6700 XT', price: 4700, power: 230 },
+        ],
+        ram: [
+          { id: 'none', name: 'Select RAM', price: 0, type: null, size: null, power: 5 },
+          { id: 'corsair_16gb', name: 'Corsair 16GB DDR4', price: 800, type: 'DDR4', size: 16 },
+          { id: 'gskill_32gb', name: 'G.Skill 32GB DDR4', price: 1400, type: 'DDR4', size: 32 },
+          { id: 'kingston_8gb', name: 'Kingston 8GB DDR4', price: 500, type: 'DDR4', size: 8 },
+        ],
+        storage: [
+          { id: 'none', name: 'Select Storage', price: 0, type: null, power: 3 },
+          { id: 'samsung_1tb_ssd', name: 'Samsung 1TB SSD', price: 900, type: 'SSD' },
+          { id: 'wd_2tb_hdd', name: 'WD 2TB HDD', price: 700, type: 'HDD' },
+          { id: 'crucial_500gb_ssd', name: 'Crucial 500GB SSD', price: 600, type: 'SSD' },
+        ],
+        psu: [
+          { id: 'none', name: 'Select PSU', price: 0, wattage: 0 },
+          { id: 'corsair_550w', name: 'Corsair 550W', price: 600, wattage: 550 },
+          { id: 'evga_650w', name: 'EVGA 650W', price: 750, wattage: 650 },
+          { id: 'seasonic_750w', name: 'Seasonic 750W', price: 900, wattage: 750 },
+          { id: 'cooler_master_850w', name: 'Cooler Master 850W', price: 1100, wattage: 850 },
+        ],
+        case: [
+          { id: 'none', name: 'Select Case', price: 0 },
+          { id: 'nzxt_h510', name: 'NZXT H510', price: 700 },
+          { id: 'corsair_4000d', name: 'Corsair 4000D', price: 800 },
+          { id: 'fractal_define', name: 'Fractal Define 7', price: 1200 },
+        ],
+      };
+
+      // Elements
+      const selects = {
+        cpu: document.getElementById('cpuSelect'),
+        motherboard: document.getElementById('mbSelect'),
+        gpu: document.getElementById('gpuSelect'),
+        ram: document.getElementById('ramSelect'),
+        storage: document.getElementById('storageSelect'),
+        psu: document.getElementById('psuSelect'),
+        case: document.getElementById('caseSelect'),
+      };
+
+      const priceEls = {
+        cpu: document.getElementById('cpuPrice'),
+        motherboard: document.getElementById('mbPrice'),
+        gpu: document.getElementById('gpuPrice'),
+        ram: document.getElementById('ramPrice'),
+        storage: document.getElementById('storagePrice'),
+        psu: document.getElementById('psuPrice'),
+        case: document.getElementById('casePrice'),
+      };
+
+      const totalPriceEl = document.getElementById('totalPrice');
+      const compatibilityStatusEl = document.getElementById('compatibilityStatus');
+      const budgetInput = document.getElementById('budgetInput');
+      const saveBuildBtn = document.getElementById('saveBuildBtn');
+      const checkCompatBtn = document.getElementById('checkCompatBtn');
+      const resetBuildBtn = document.getElementById('resetBuildBtn');
+
+      // Helper: populate select
+      function populateSelect(selectEl, items) {
+        selectEl.innerHTML = '';
+        items.forEach(item => {
+          const option = document.createElement('option');
+          option.value = item.id;
+          option.textContent = item.name;
+          selectEl.appendChild(option);
+        });
+      }
+
+      // Populate all selects
+      Object.entries(partsData).forEach(([key, items]) => {
+        populateSelect(selects[key], items);
+      });
+
+      // Get selected part object or null
+      function getSelectedPart(type) {
+        const id = selects[type].value;
+        return partsData[type].find(p => p.id === id) || null;
+      }
+
+      // Update individual price display
+      function updatePrice(type) {
+        const part = getSelectedPart(type);
+        priceEls[type].textContent = part ? (part.price > 0 ? part.price + ' DH' : '—') : '—';
+      }
+
+      // Update all prices
+      function updateAllPrices() {
+        Object.keys(partsData).forEach(updatePrice);
+      }
+
+      // Calculate total price
+      function calculateTotal() {
+        let total = 0;
+        Object.keys(partsData).forEach(type => {
+          const part = getSelectedPart(type);
+          if (part) total += part.price;
+        });
+        return total;
+      }
+
+      // Calculate total power draw
+      function calculatePowerDraw() {
+        let power = 0;
+        const cpu = getSelectedPart('cpu');
+        const gpu = getSelectedPart('gpu');
+        const ram = getSelectedPart('ram');
+        const storage = getSelectedPart('storage');
+        if (cpu) power += cpu.power || 0;
+        if (gpu) power += gpu.power || 0;
+        if (ram) power += ram.power || 0;
+        if (storage) power += storage.power || 0;
+        return power;
+      }
+
+      // Compatibility check
+      function checkCompatibility() {
+        const cpu = getSelectedPart('cpu');
+        const motherboard = getSelectedPart('motherboard');
+        const ram = getSelectedPart('ram');
+        const psu = getSelectedPart('psu');
+
+        let issues = [];
+
+        // CPU-MB socket match
+        if (cpu && motherboard && cpu.socket !== motherboard.socket) {
+          issues.push(`CPU socket (${cpu.socket || 'N/A'}) and Motherboard socket (${motherboard.socket || 'N/A'}) mismatch.`);
+        }
+
+        // RAM type match
+        if (motherboard && ram && motherboard.ramType !== ram.type) {
+          issues.push(`RAM type (${ram.type || 'N/A'}) incompatible with Motherboard RAM type (${motherboard.ramType || 'N/A'}).`);
+        }
+
+        // PSU wattage sufficient
+        const powerDraw = calculatePowerDraw();
+        if (psu && psu.wattage > 0 && powerDraw > psu.wattage) {
+          issues.push(`Power draw (${powerDraw}W) exceeds PSU wattage (${psu.wattage}W).`);
+        }
+
+        // Budget check
+        const budget = Number(budgetInput.value) || 0;
+        const total = calculateTotal();
+        if (budget > 0 && total > budget) {
+          issues.push(`Build price (${total} DH) exceeds budget (${budget} DH).`);
+        }
+
+        // Build status message
+        if (issues.length === 0) {
+          compatibilityStatusEl.innerHTML = `Compatibility: <span style="color:#0f0;">No issues detected ✓</span>\nPower Draw: ${powerDraw} W`;
+        } else {
+          compatibilityStatusEl.innerHTML = `Compatibility: <span style="color: var(--danger);">Issues detected:</span>\n- ${issues.join('\n- ')}\nPower Draw: ${powerDraw} W`;
+        }
+      }
+
+      // Update total price and price displays
+      function updateUI() {
+        updateAllPrices();
+        totalPriceEl.textContent = calculateTotal() + ' DH';
+      }
+
+      // Save build to localStorage
+      function saveBuild() {
+        const build = {};
+        Object.keys(partsData).forEach(type => {
+          build[type] = selects[type].value;
+        });
+        localStorage.setItem('pcBuild', JSON.stringify(build));
+        alert('Build saved locally.');
+      }
+
+      // Load build from localStorage
+      function loadBuild() {
+        const saved = localStorage.getItem('pcBuild');
+        if (saved) {
+          const build = JSON.parse(saved);
+          Object.entries(build).forEach(([type, id]) => {
+            if (selects[type].querySelector(`option[value="${id}"]`)) {
+              selects[type].value = id;
+            }
+          });
+        }
+      }
+
+      // Reset build selections
+      function resetBuild() {
+        Object.keys(partsData).forEach(type => {
+          selects[type].value = 'none';
+        });
+        updateUI();
+        compatibilityStatusEl.innerHTML = `Compatibility: <span>—</span><br>Power Draw: — W`;
+      }
+
+      // Event listeners
+      Object.values(selects).forEach(select => {
+        select.addEventListener('change', () => {
+          updateUI();
+          compatibilityStatusEl.innerHTML = `Compatibility: <span>—</span><br>Power Draw: — W`;
+        });
+      });
+
+      budgetInput.addEventListener('input', () => {
+        compatibilityStatusEl.innerHTML = `Compatibility: <span>—</span><br>Power Draw: — W`;
+      });
+
+      saveBuildBtn.addEventListener('click', saveBuild);
+      checkCompatBtn.addEventListener('click', checkCompatibility);
+      resetBuildBtn.addEventListener('click', () => {
+        resetBuild();
+        localStorage.removeItem('pcBuild');
+      });
+
+      // Init
+      loadBuild();
+      updateUI();
+    })();
+  </script>
 
 </body>
 </html>
