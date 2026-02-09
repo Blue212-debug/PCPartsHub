@@ -138,23 +138,17 @@ border-radius:8px;
 
 .price{text-align:right;color:var(--muted)}
 
-button{
-width:100%;
-margin-top:12px;
+.clear{
+margin-top:14px;
 padding:12px;
+width:100%;
 border:none;
 border-radius:12px;
 font-weight:600;
 cursor:pointer;
-background:linear-gradient(135deg,#4f7cff,#6fa3ff);
+background:var(--danger);
 color:#fff;
 }
-
-button:hover{filter:brightness(1.1)}
-
-.row-btns{display:flex;gap:10px}
-
-.clear{background:var(--danger)}
 
 /* ================= SUMMARY ================= */
 
@@ -173,6 +167,34 @@ border-radius:10px;
 font-size:13px;
 white-space:pre-line;
 margin-bottom:12px;
+}
+
+.summary-actions{
+display:flex;
+gap:12px;
+margin-top:16px;
+}
+
+.summary-actions button{
+flex:1;
+padding:12px;
+border-radius:12px;
+font-weight:600;
+border:none;
+cursor:pointer;
+color:#fff;
+}
+
+.summary-actions .check{
+background:linear-gradient(135deg,#28c76f,#3fe08f);
+}
+
+.summary-actions .save{
+background:linear-gradient(135deg,#4f7cff,#6fa3ff);
+}
+
+.summary-actions button:hover{
+filter:brightness(1.1);
 }
 
 </style>
@@ -257,11 +279,6 @@ Budget DH
 <div id="caseP" class="price">—</div>
 </div>
 
-<div class="row-btns">
-<button id="checkBtn">Check</button>
-<button id="saveBtn">Save</button>
-</div>
-
 <button class="clear" id="clearBtn">Clear</button>
 
 </section>
@@ -276,12 +293,12 @@ Budget DH
 <span id="total">0 DH</span>
 </div>
 
-<div class="box" id="status">
-Compatibility: —
-</div>
+<div class="box" id="status">Compatibility: —</div>
+<div class="box" id="power">Power: —</div>
 
-<div class="box" id="power">
-Power: —
+<div class="summary-actions">
+<button id="checkBtn" class="check">Check</button>
+<button id="saveBtn" class="save">Save</button>
 </div>
 
 </aside>
@@ -293,7 +310,6 @@ Power: —
 /* ================= DATA ================= */
 
 const data={
-
 cpu:[
 {id:"none",n:"Select CPU",p:0,socket:null,w:0},
 {id:"i5_12400",n:"Intel i5-12400",p:1800,socket:"LGA1700",w:65},
@@ -301,7 +317,6 @@ cpu:[
 {id:"r5_5600",n:"Ryzen 5 5600",p:1700,socket:"AM4",w:65},
 {id:"r7_7700",n:"Ryzen 7 7700X",p:3800,socket:"AM5",w:105}
 ],
-
 mb:[
 {id:"none",n:"Select MB",p:0,socket:null,ram:null},
 {id:"b660",n:"MSI B660 (LGA1700 DDR4)",p:1400,socket:"LGA1700",ram:"DDR4"},
@@ -309,7 +324,6 @@ mb:[
 {id:"b550",n:"Gigabyte B550 (AM4 DDR4)",p:1300,socket:"AM4",ram:"DDR4"},
 {id:"x670",n:"ASRock X670 (AM5 DDR5)",p:2600,socket:"AM5",ram:"DDR5"}
 ],
-
 gpu:[
 {id:"none",n:"Select GPU",p:0,w:0},
 {id:"rtx3060",n:"RTX 3060",p:3500,w:170},
@@ -317,7 +331,6 @@ gpu:[
 {id:"rx6700",n:"RX 6700XT",p:4200,w:230},
 {id:"rx7800",n:"RX 7800XT",p:7000,w:260}
 ],
-
 ram:[
 {id:"none",n:"Select RAM",p:0,type:null,w:0},
 {id:"16ddr4",n:"16GB DDR4",p:700,type:"DDR4",w:5},
@@ -325,28 +338,24 @@ ram:[
 {id:"16ddr5",n:"16GB DDR5",p:1200,type:"DDR5",w:6},
 {id:"32ddr5",n:"32GB DDR5",p:2000,type:"DDR5",w:8}
 ],
-
 storage:[
 {id:"none",n:"Select Storage",p:0,w:0},
 {id:"ssd1",n:"NVMe SSD 1TB",p:900,w:5},
 {id:"ssd2",n:"NVMe SSD 2TB",p:1600,w:6},
 {id:"hdd2",n:"HDD 2TB",p:700,w:7}
 ],
-
 psu:[
 {id:"none",n:"Select PSU",p:0,w:0},
 {id:"650",n:"650W Bronze",p:700,w:650},
 {id:"750",n:"750W Gold",p:1000,w:750},
 {id:"850",n:"850W Gold",p:1400,w:850}
 ],
-
 case:[
 {id:"none",n:"Select Case",p:0},
 {id:"nzxt",n:"NZXT H510",p:700},
 {id:"corsair",n:"Corsair 4000D",p:800},
 {id:"lianli",n:"Lian Li O11",p:1400}
 ]
-
 };
 
 const parts=["cpu","mb","gpu","ram","storage","psu","case"];
@@ -370,7 +379,6 @@ return data[p].find(i=>i.id===document.getElementById(p).value);
 }
 
 function update(){
-
 let total=0;
 let power=0;
 
@@ -395,7 +403,6 @@ return {total,power};
 /* ================= CHECK ================= */
 
 function check(){
-
 const cpu=get("cpu");
 const mb=get("mb");
 const ram=get("ram");
@@ -406,69 +413,47 @@ const budget=+budgetInput.value;
 
 let issues=[];
 
-/* Socket */
 if(cpu.socket && mb.socket && cpu.socket!==mb.socket)
 issues.push("CPU and Motherboard socket mismatch");
 
-/* RAM */
 if(mb.ram && ram.type && mb.ram!==ram.type)
 issues.push("RAM type incompatible");
 
-/* PSU */
 if(psu.w && power>psu.w*0.85)
 issues.push("PSU insufficient (no headroom)");
 
-/* Budget */
 if(total>budget)
 issues.push("Over budget");
 
-status.textContent=
-issues.length?
-"Issues:\n- "+issues.join("\n- "):
-"Compatible ✓";
-
+status.textContent = issues.length
+? "Issues:\n- "+issues.join("\n- ")
+: "Compatible ✓";
 }
 
 /* ================= SAVE ================= */
 
 function save(){
-
 let b={};
-
-parts.forEach(p=>{
-b[p]=document.getElementById(p).value;
-});
-
+parts.forEach(p=>b[p]=document.getElementById(p).value);
 localStorage.setItem("pcBuildPro",JSON.stringify(b));
 alert("Saved");
 }
 
 function load(){
-
 const s=localStorage.getItem("pcBuildPro");
 if(!s) return;
-
 const b=JSON.parse(s);
-
-parts.forEach(p=>{
-if(b[p]) document.getElementById(p).value=b[p];
-});
-
+parts.forEach(p=>{ if(b[p]) document.getElementById(p).value=b[p]; });
 update();
 }
 
 /* ================= CLEAR ================= */
 
 function clearAll(){
-
-parts.forEach(p=>{
-document.getElementById(p).value="none";
-});
-
+parts.forEach(p=>document.getElementById(p).value="none");
 update();
-
 status.textContent="Compatibility: —";
-power.textContent="Power: —";
+powerEl.textContent="Power: —";
 }
 
 /* ================= EVENTS ================= */
@@ -478,15 +463,11 @@ const powerEl=document.getElementById("power");
 const status=document.getElementById("status");
 const budgetInput=document.getElementById("budget");
 
-parts.forEach(p=>{
-document.getElementById(p).onchange=update;
-});
+parts.forEach(p=>document.getElementById(p).onchange=update);
 
 checkBtn.onclick=check;
 saveBtn.onclick=save;
 clearBtn.onclick=clearAll;
-
-/* ================= START ================= */
 
 load();
 update();
