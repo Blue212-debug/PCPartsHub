@@ -224,7 +224,6 @@ body {
 }
 
 .card-footer button {
-  background: var(--accent);
   border: none;
   border-radius: 8px;
   padding: 6px 12px;
@@ -234,8 +233,20 @@ body {
   transition: background 0.2s;
 }
 
-.card-footer button:hover {
+.card-footer .btn-edit {
+  background: var(--accent);
+}
+
+.card-footer .btn-edit:hover {
   background: #3a5fe1;
+}
+
+.card-footer .btn-delete {
+  background: #e04e4e;
+}
+
+.card-footer .btn-delete:hover {
+  background: #c43a3a;
 }
 
 /* Modal */
@@ -563,6 +574,7 @@ body {
     pcDesc.value = '';
     pcCondition.value = 'New';
     pcUsage.value = 'Gaming';
+    resetSubmitButton();
   }
 
   // Open modal
@@ -625,10 +637,8 @@ body {
 
     modal.classList.add('active');
 
-    // Change submit button to "Update"
     submitBtn.textContent = 'Update Build';
 
-    // Remove existing listeners so no duplicates
     const newSubmit = submitBtn.cloneNode(true);
     submitBtn.parentNode.replaceChild(newSubmit, submitBtn);
 
@@ -652,19 +662,16 @@ body {
         desc,
         condition,
         usage,
-        addedAt: pc.addedAt, // Keep original added date
+        addedAt: pc.addedAt,
       };
 
       savePCs();
       renderPCs();
       closeModal();
-
-      // Reset submit button text and listener to Add PC
-      resetSubmitButton();
     });
   }
 
-  // Reset submit button to Add PC and normal listener
+  // Reset submit button to Add Build and normal listener
   function resetSubmitButton() {
     const originalBtn = document.getElementById('submitBtn');
     const newBtn = originalBtn.cloneNode(true);
