@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>PC Ready</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
 <style>
-
 :root {
   --bg: #0b0e14;
   --panel: #121723;
@@ -17,6 +16,7 @@
   --text: #e6e8ee;
   --muted: #9aa1b2;
   --success: #28c76f;
+  --danger: #e03e3e;
   --radius: 14px;
 }
 
@@ -28,12 +28,12 @@
 
 body {
   font-family: 'Inter', sans-serif;
-  background: radial-gradient(1200px 600px at 20% -10%, #16204a, transparent), var(--bg);
+  background: var(--bg);
   color: var(--text);
   min-height: 100vh;
 }
 
-/* Top Bar */
+/* TOP */
 
 .top-bar {
   background: var(--panel-2);
@@ -51,9 +51,8 @@ body {
 
 .profile {
   display: flex;
-  align-items: center;
   gap: 12px;
-  font-size: 14px;
+  align-items: center;
   color: var(--muted);
 }
 
@@ -64,7 +63,7 @@ body {
   border: 2px solid var(--accent);
 }
 
-/* Navigation */
+/* NAV */
 
 .nav-bar {
   display: flex;
@@ -75,10 +74,8 @@ body {
 }
 
 .nav-item {
-  text-decoration: none;
   color: var(--muted);
-  font-size: 14px;
-  font-weight: 500;
+  text-decoration: none;
   padding: 6px 12px;
   border-radius: 8px;
   transition: 0.2s;
@@ -94,7 +91,7 @@ body {
   color: white;
 }
 
-/* Add Button Section */
+/* ADD */
 
 .add-section {
   padding: 15px 40px;
@@ -110,7 +107,6 @@ body {
   padding: 8px 18px;
   border-radius: 10px;
   color: white;
-  font-weight: 600;
   cursor: pointer;
 }
 
@@ -118,7 +114,7 @@ body {
   filter: brightness(1.1);
 }
 
-/* Layout */
+/* LAYOUT */
 
 .container {
   display: grid;
@@ -126,18 +122,20 @@ body {
   height: calc(100vh - 160px);
 }
 
-/* Sidebar */
+/* SIDEBAR */
 
 .sidebar {
   background: var(--panel);
   border-right: 1px solid #1c2340;
   padding: 24px;
+  overflow-y: auto;
 }
 
 .sidebar h3 {
-  font-size: 16px;
   margin-bottom: 20px;
 }
+
+/* FILTERS */
 
 .filter {
   margin-bottom: 20px;
@@ -150,13 +148,9 @@ body {
   margin-bottom: 6px;
 }
 
-/* Slider */
-
 .filter input[type=range] {
   width: 100%;
 }
-
-/* Select */
 
 .filter select {
   width: 100%;
@@ -168,37 +162,180 @@ body {
   outline: none;
 }
 
-/* Main */
+/* MAIN */
 
 .main {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   padding: 40px;
+  overflow-y: auto;
 }
 
-/* Empty Box */
+/* GRID */
 
-.empty-box {
+.builds {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+}
+
+/* CARD */
+
+.card {
   background: var(--panel);
-  border-radius: var(--radius);
-  padding: 40px;
-  text-align: center;
-  max-width: 400px;
+  border-radius: 14px;
   border: 1px solid #1c2340;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 370px;
+  position: relative;
 }
 
-.empty-box h2 {
-  font-size: 20px;
-  margin-bottom: 10px;
+.card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
 }
 
-.empty-box p {
-  font-size: 14px;
+.card-body {
+  padding: 16px;
+  flex-grow: 1;
+}
+
+.card h3 {
+  margin-bottom: 6px;
+}
+
+.price {
+  color: var(--success);
+  font-weight: 600;
+}
+
+.desc {
+  font-size: 13px;
   color: var(--muted);
+  margin-top: 6px;
+  height: 70px;
+  overflow: hidden;
 }
 
-/* Responsive */
+.card-footer {
+  padding: 8px 16px 16px 16px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.btn-edit, .btn-delete {
+  flex: 1;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.btn-edit {
+  background: var(--accent);
+  color: white;
+}
+
+.btn-edit:hover {
+  background: #3a62e8;
+}
+
+.btn-delete {
+  background: var(--danger);
+  color: white;
+}
+
+.btn-delete:hover {
+  background: #b83030;
+}
+
+/* EMPTY */
+
+.empty {
+  text-align: center;
+  color: var(--muted);
+  margin-top: 100px;
+}
+
+/* MODAL */
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.modal.active {
+  display: flex;
+}
+
+.modal-box {
+  background: var(--panel);
+  padding: 25px;
+  border-radius: 14px;
+  width: 400px;
+  border: 1px solid #1c2340;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal h2 {
+  margin-bottom: 15px;
+}
+
+.modal input,
+.modal textarea,
+.modal select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 12px;
+  background: var(--panel-2);
+  border: 1px solid #222b52;
+  color: white;
+  border-radius: 8px;
+  outline: none;
+  font-size: 14px;
+}
+
+.modal textarea {
+  resize: none;
+  height: 70px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.btn {
+  padding: 7px 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.save {
+  background: var(--success);
+  color: white;
+}
+
+.cancel {
+  background: #333;
+  color: white;
+}
+
+/* RESPONSIVE */
 
 @media (max-width: 800px) {
   .container {
@@ -212,112 +349,270 @@ body {
 
 </style>
 </head>
-
 <body>
 
-<!-- Top Bar -->
-
+<!-- TOP -->
 <div class="top-bar">
-
   <div class="logo">PCPartsHub</div>
-
   <div class="profile">
-    <img src="https://i.pravatar.cc/32">
+    <img src="https://i.pravatar.cc/32" />
     Ahmed
   </div>
-
 </div>
 
-<!-- Navigation -->
-
+<!-- NAV -->
 <nav class="nav-bar">
-
   <a href="index.html" class="nav-item">Builder</a>
-  <a href="pcready.html" class="nav-item active">Completed Builds</a>
+  <a href="pcready.html" class="nav-item active">Completed</a>
   <a href="graph.html" class="nav-item">Graphs</a>
-
 </nav>
 
-<!-- Add Button -->
-
+<!-- ADD -->
 <div class="add-section">
-  <button class="add-btn">+ Add PC</button>
+  <button class="add-btn" id="openModal">+ Add PC</button>
 </div>
 
-<!-- Layout -->
-
+<!-- LAYOUT -->
 <div class="container">
-
-  <!-- Sidebar -->
-
   <div class="sidebar">
-
     <h3>Filters</h3>
-
     <div class="filter">
-      <label>Max Price (€)</label>
-      <input type="range" min="1000" max="30000" value="1500" id="priceRange">
-      <small id="priceValue">€1500</small>
+      <label for="priceRange">Max Price (€): <span id="priceValue">30000</span></label>
+      <input type="range" min="1000" max="30000" value="30000" id="priceRange" />
     </div>
 
     <div class="filter">
-      <label>Condition</label>
-      <select>
-        <option>All</option>
-        <option>New</option>
-        <option>Used</option>
+      <label for="conditionFilter">Condition</label>
+      <select id="conditionFilter">
+        <option value="all">All</option>
+        <option value="new">New</option>
+        <option value="used">Used</option>
       </select>
     </div>
 
     <div class="filter">
-      <label>Usage</label>
-      <select>
-        <option>All</option>
-        <option>Gaming</option>
-        <option>Office</option>
-        <option>Work</option>
+      <label for="usageFilter">Usage</label>
+      <select id="usageFilter">
+        <option value="all">All</option>
+        <option value="gaming">Gaming</option>
+        <option value="office">Office</option>
+        <option value="work">Work</option>
       </select>
     </div>
 
     <div class="filter">
-      <label>Sort</label>
-      <select>
-        <option>Newest</option>
-        <option>Cheapest</option>
-        <option>Oldest</option>
+      <label for="sortFilter">Sort</label>
+      <select id="sortFilter">
+        <option value="newest">Newest</option>
+        <option value="cheapest">Cheapest</option>
+        <option value="oldest">Oldest</option>
       </select>
     </div>
-
   </div>
-
-  <!-- Main -->
 
   <div class="main">
-
-    <div class="empty-box">
-
+    <div id="empty" class="empty">
       <h2>No PCs Available</h2>
-      <p>No PC catalogue is available right now.</p>
-      <p>Add one to get started.</p>
-
+      <p>Add one to get started</p>
     </div>
 
+    <div id="builds" class="builds"></div>
   </div>
+</div>
 
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-box">
+    <h2 id="modalTitle">Add New PC</h2>
+
+    <input id="name" placeholder="PC Name" />
+    <input id="img" placeholder="Image URL" />
+    <input id="price" type="number" placeholder="Price (€)" min="1" />
+    <textarea id="desc" placeholder="Description"></textarea>
+
+    <div class="filter">
+      <label for="conditionInput">Condition</label>
+      <select id="conditionInput">
+        <option value="new">New</option>
+        <option value="used">Used</option>
+      </select>
+    </div>
+
+    <div class="filter">
+      <label for="usageInput">Usage</label>
+      <select id="usageInput">
+        <option value="gaming">Gaming</option>
+        <option value="office">Office</option>
+        <option value="work">Work</option>
+      </select>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn cancel" id="close">Cancel</button>
+      <button class="btn save" id="save">Save</button>
+    </div>
+  </div>
 </div>
 
 <script>
+const modal = document.getElementById("modal");
+const open = document.getElementById("openModal");
+const close = document.getElementById("close");
+const save = document.getElementById("save");
 
-/* Price slider */
+const builds = document.getElementById("builds");
+const empty = document.getElementById("empty");
 
-const slider = document.getElementById("priceRange");
+const priceRange = document.getElementById("priceRange");
 const priceValue = document.getElementById("priceValue");
+const conditionFilter = document.getElementById("conditionFilter");
+const usageFilter = document.getElementById("usageFilter");
+const sortFilter = document.getElementById("sortFilter");
 
-priceValue.textContent = "DH" + slider.value;
+const modalTitle = document.getElementById("modalTitle");
+const nameInput = document.getElementById("name");
+const imgInput = document.getElementById("img");
+const priceInput = document.getElementById("price");
+const descInput = document.getElementById("desc");
+const conditionInput = document.getElementById("conditionInput");
+const usageInput = document.getElementById("usageInput");
 
-slider.oninput = function() {
-  priceValue.textContent = "DH" + this.value;
+let pcs = JSON.parse(localStorage.getItem("pcs")) || [];
+
+let editIndex = null;
+
+/* Show price value */
+priceValue.textContent = priceRange.value;
+
+priceRange.oninput = () => {
+  priceValue.textContent = priceRange.value;
+  render();
 };
+
+conditionFilter.onchange = render;
+usageFilter.onchange = render;
+sortFilter.onchange = render;
+
+/* OPEN MODAL FOR ADD */
+open.onclick = () => {
+  editIndex = null;
+  modalTitle.textContent = "Add New PC";
+  nameInput.value = "";
+  imgInput.value = "";
+  priceInput.value = "";
+  descInput.value = "";
+  conditionInput.value = "new";
+  usageInput.value = "gaming";
+  modal.classList.add("active");
+};
+
+/* CLOSE MODAL */
+close.onclick = () => modal.classList.remove("active");
+
+/* SAVE PC (Add or Edit) */
+save.onclick = () => {
+  const name = nameInput.value.trim();
+  const img = imgInput.value.trim();
+  const price = parseFloat(priceInput.value);
+  const desc = descInput.value.trim();
+  const condition = conditionInput.value;
+  const usage = usageInput.value;
+
+  if (!name || !img || !price || price <= 0) {
+    alert("Please fill all fields correctly.");
+    return;
+  }
+
+  const pc = { name, img, price, desc, condition, usage, created: Date.now() };
+
+  if (editIndex !== null) {
+    pcs[editIndex] = pc;
+  } else {
+    pcs.push(pc);
+  }
+
+  localStorage.setItem("pcs", JSON.stringify(pcs));
+  render();
+  modal.classList.remove("active");
+};
+
+/* EDIT PC */
+function editPC(index) {
+  const pc = pcs[index];
+  editIndex = index;
+
+  modalTitle.textContent = "Edit PC";
+
+  nameInput.value = pc.name;
+  imgInput.value = pc.img;
+  priceInput.value = pc.price;
+  descInput.value = pc.desc;
+  conditionInput.value = pc.condition;
+  usageInput.value = pc.usage;
+
+  modal.classList.add("active");
+}
+
+/* DELETE PC */
+function deletePC(index) {
+  if (confirm("Delete this PC?")) {
+    pcs.splice(index, 1);
+    localStorage.setItem("pcs", JSON.stringify(pcs));
+    render();
+  }
+}
+
+/* RENDER BUILDS WITH FILTERS */
+function render() {
+  builds.innerHTML = "";
+
+  let filtered = pcs.filter(pc => {
+    if (pc.price > priceRange.value) return false;
+    if (conditionFilter.value !== "all" && pc.condition !== conditionFilter.value)
+      return false;
+    if (usageFilter.value !== "all" && pc.usage !== usageFilter.value) return false;
+    return true;
+  });
+
+  // Sort
+  if (sortFilter.value === "newest") {
+    filtered.sort((a, b) => b.created - a.created);
+  } else if (sortFilter.value === "oldest") {
+    filtered.sort((a, b) => a.created - b.created);
+  } else if (sortFilter.value === "cheapest") {
+    filtered.sort((a, b) => a.price - b.price);
+  }
+
+  if (filtered.length === 0) {
+    empty.style.display = "block";
+    return;
+  }
+
+  empty.style.display = "none";
+
+  filtered.forEach((pc, i) => {
+    const card = document.createElement("div");
+    card.classList.add("card");
+    card.innerHTML = `
+      <img src="${pc.img}" alt="${pc.name}">
+      <div class="card-body">
+        <h3>${pc.name}</h3>
+        <div class="price">€${pc.price.toLocaleString()}</div>
+        <div class="desc">${pc.desc || ""}</div>
+        <div><strong>Condition:</strong> ${pc.condition}</div>
+        <div><strong>Usage:</strong> ${pc.usage}</div>
+      </div>
+      <div class="card-footer">
+        <button class="btn-edit" onclick="editPC(${i})">Edit</button>
+        <button class="btn-delete" onclick="deletePC(${i})">Delete</button>
+      </div>
+    `;
+    builds.appendChild(card);
+  });
+}
+
+/* Initial render */
+render();
 
 </script>
 
