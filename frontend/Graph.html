@@ -1,166 +1,279 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Graphs</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
-  :root {
-    --bg: #0b0e14;
-    --panel: #121723;
-    --panel-2: #161c2e;
-    --accent: #4f7cff;
-    --text: #e6e8ee;
-    --muted: #9aa1b2;
-    --radius: 14px;
-  }
-  * {
-    margin: 0; padding: 0; box-sizing: border-box;
-  }
-  body {
-    font-family: 'Inter', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-  }
-  .top-bar {
-    background: var(--panel-2);
-    padding: 12px 40px;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    border-bottom: 1px solid #1c2340;
-  }
-  .profile {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    color: var(--muted);
-    cursor: pointer;
-  }
-  .profile img {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    border: 2px solid var(--accent);
-  }
-  header {
-    background: var(--panel);
-    padding: 20px 40px;
-    border-bottom: 1px solid #1c2340;
-  }
-  header h1 {
-    font-size: 22px;
-    font-weight: 600;
-    letter-spacing: 0.3px;
-    user-select: none;
-  }
-  nav {
-    background: var(--panel-2);
-    padding: 10px 40px;
-    display: flex;
-    gap: 30px;
-    border-bottom: 1px solid #1c2340;
-  }
-  nav a {
-    text-decoration: none;
-    color: var(--muted);
-    font-weight: 500;
-    padding: 8px 12px;
-    border-radius: 10px;
-    transition: background 0.2s;
-  }
-  nav a.active, nav a:hover {
-    background: var(--accent);
-    color: #fff;
-  }
-  main {
-    padding: 40px;
-    max-width: 900px;
-    margin: 0 auto;
-  }
-  .title {
-    text-align: center;
-    margin-bottom: 40px;
-  }
-  .title h1 {
-    margin-bottom: 8px;
-  }
-  .title p {
-    color: var(--muted);
-    font-size: 18px;
-    font-weight: 600;
-  }
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-    gap: 35px;
-    justify-items: center;
-  }
-  .card {
-    background: var(--panel);
-    padding: 40px 30px;
-    border-radius: var(--radius);
-    border: 1px solid #1c2340;
-    text-align: center;
-    width: 280px;
-  }
-  .card h3 {
-    margin-bottom: 20px;
-    font-size: 22px;
-  }
-  .card p {
-    color: var(--muted);
-    font-size: 18px;
-    font-weight: 600;
-  }
+
+/* ========== THEME ========== */
+
+:root{
+--bg:#0b0e14;
+--panel:#121723;
+--panel2:#161c2e;
+--accent:#4f7cff;
+--text:#e6e8ee;
+--muted:#9aa1b2;
+--radius:14px;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+font-family:Inter,sans-serif;
+background:var(--bg);
+color:var(--text);
+min-height:100vh;
+}
+
+/* ========== TOP ========== */
+
+.top-bar{
+background:var(--panel2);
+padding:10px 40px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+border-bottom:1px solid #1c2340;
+}
+
+.logo{
+font-size:20px;
+font-weight:600;
+}
+
+.profile{
+display:flex;
+align-items:center;
+gap:12px;
+color:var(--muted);
+}
+
+.profile img{
+width:32px;
+height:32px;
+border-radius:50%;
+border:2px solid var(--accent);
+}
+
+/* ========== NAV ========== */
+
+.nav-bar{
+display:flex;
+gap:20px;
+padding:14px 40px;
+background:var(--panel);
+border-bottom:1px solid #1c2340;
+}
+
+.nav-item{
+color:var(--muted);
+text-decoration:none;
+padding:6px 12px;
+border-radius:8px;
+}
+
+.nav-item.active{
+background:var(--accent);
+color:#fff;
+}
+
+/* ========== MAIN ========== */
+
+main{
+padding:40px;
+max-width:1100px;
+margin:auto;
+}
+
+.title{
+text-align:center;
+margin-bottom:40px;
+}
+
+.title p{
+color:var(--muted);
+margin-top:6px;
+}
+
+/* ========== GRID ========== */
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:30px;
+}
+
+/* ========== CARDS ========== */
+
+.card{
+background:var(--panel);
+padding:26px;
+border-radius:var(--radius);
+border:1px solid #1c2340;
+}
+
+.card h3{
+margin-bottom:14px;
+}
+
+/* ========== BAR ========== */
+
+.bar{
+height:14px;
+background:#0f1530;
+border-radius:10px;
+overflow:hidden;
+margin:8px 0;
+border:1px solid #1c2340;
+}
+
+.fill{
+height:100%;
+background:linear-gradient(90deg,#4f7cff,#6fa3ff);
+border-radius:10px;
+}
+
+.stat{
+display:flex;
+justify-content:space-between;
+font-size:13px;
+color:var(--muted);
+}
+
 </style>
 </head>
+
 <body>
 
-  <div class="top-bar">
-    <div class="profile" title="Ahmed">
-      Ahmed
-      <img src="https://i.pravatar.cc/32" alt="Profile" />
-    </div>
-  </div>
+<!-- TOP -->
+<div class="top-bar">
 
-  <header>
-    <h1>PCPartsHub</h1>
-  </header>
+<div class="logo">PCPartsHub</div>
 
-  <nav>
-    <a href="index.html">Builder Catalogue</a>
-    <a href="pcready.html">PC Catalogue</a>
-    <a href="graph.html" class="active">Graphs</a>
-  </nav>
+<div class="profile">
+<img src="https://i.pravatar.cc/32">
+Ahmed
+</div>
 
-  <main>
-    <div class="title">
-      <h1>System Graphs</h1>
-      <p>No graphs available now</p>
-    </div>
+</div>
 
-    <div class="grid">
-      <div class="card">
-        <h3>CPU</h3>
-        <p>No data available</p>
-      </div>
-      <div class="card">
-        <h3>GPU</h3>
-        <p>No data available</p>
-      </div>
-      <div class="card">
-        <h3>RAM</h3>
-        <p>No data available</p>
-      </div>
-      <div class="card">
-        <h3>SSD</h3>
-        <p>No data available</p>
-      </div>
-    </div>
-  </main>
+<!-- NAV -->
+<nav class="nav-bar">
+<a href="index.html" class="nav-item">Builder</a>
+<a href="pcready.html" class="nav-item">Completed</a>
+<a href="graph.html" class="nav-item active">Graphs</a>
+</nav>
+
+<!-- MAIN -->
+<main>
+
+<div class="title">
+<h1>System Performance</h1>
+<p>Simulated benchmark results</p>
+</div>
+
+<div class="grid">
+
+<!-- CPU -->
+<div class="card">
+<h3>CPU</h3>
+
+<div class="stat">
+<span>Single Core</span>
+<span>82%</span>
+</div>
+<div class="bar"><div class="fill" style="width:82%"></div></div>
+
+<div class="stat">
+<span>Multi Core</span>
+<span>91%</span>
+</div>
+<div class="bar"><div class="fill" style="width:91%"></div></div>
+
+<div class="stat">
+<span>Gaming</span>
+<span>88%</span>
+</div>
+<div class="bar"><div class="fill" style="width:88%"></div></div>
+</div>
+
+<!-- GPU -->
+<div class="card">
+<h3>GPU</h3>
+
+<div class="stat">
+<span>Raster</span>
+<span>90%</span>
+</div>
+<div class="bar"><div class="fill" style="width:90%"></div></div>
+
+<div class="stat">
+<span>Ray Tracing</span>
+<span>76%</span>
+</div>
+<div class="bar"><div class="fill" style="width:76%"></div></div>
+
+<div class="stat">
+<span>VR Ready</span>
+<span>85%</span>
+</div>
+<div class="bar"><div class="fill" style="width:85%"></div></div>
+</div>
+
+<!-- RAM -->
+<div class="card">
+<h3>RAM</h3>
+
+<div class="stat">
+<span>Capacity</span>
+<span>95%</span>
+</div>
+<div class="bar"><div class="fill" style="width:95%"></div></div>
+
+<div class="stat">
+<span>Speed</span>
+<span>88%</span>
+</div>
+<div class="bar"><div class="fill" style="width:88%"></div></div>
+
+<div class="stat">
+<span>Latency</span>
+<span>79%</span>
+</div>
+<div class="bar"><div class="fill" style="width:79%"></div></div>
+</div>
+
+<!-- SSD -->
+<div class="card">
+<h3>Storage</h3>
+
+<div class="stat">
+<span>Read</span>
+<span>92%</span>
+</div>
+<div class="bar"><div class="fill" style="width:92%"></div></div>
+
+<div class="stat">
+<span>Write</span>
+<span>89%</span>
+</div>
+<div class="bar"><div class="fill" style="width:89%"></div></div>
+
+<div class="stat">
+<span>Load Time</span>
+<span>94%</span>
+</div>
+<div class="bar"><div class="fill" style="width:94%"></div></div>
+</div>
+
+</div>
+
+</main>
 
 </body>
 </html>

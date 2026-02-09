@@ -1,617 +1,497 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>PCPartsHub</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PCPartsHub Pro</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-  <style>
-    :root {
-      --bg: #0b0e14;
-      --panel: #121723;
-      --panel-2: #161c2e;
-      --accent: #4f7cff;
-      --text: #e6e8ee;
-      --muted: #9aa1b2;
-      --danger: #ff5c5c;
-      --radius: 14px;
-    }
+<style>
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+/* ================= THEME ================= */
 
-    body {
-      font-family: 'Inter', system-ui, sans-serif;
-      background: radial-gradient(1200px 600px at 20% -10%, #16204a, transparent), var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-    }
+:root{
+--bg:#0b0e14;
+--panel:#121723;
+--panel2:#161c2e;
+--accent:#4f7cff;
+--text:#e6e8ee;
+--muted:#9aa1b2;
+--danger:#ff5c5c;
+--success:#28c76f;
+--radius:14px;
+}
 
-    .top-bar {
-      background: var(--panel-2);
-      padding: 10px 40px;
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      border-bottom: 1px solid #1c2340;
-      gap: 12px;
-      font-size: 14px;
-      color: var(--muted);
-      height: 60px;
-      box-sizing: border-box;
-    }
+*{margin:0;padding:0;box-sizing:border-box}
 
-    .profile {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      cursor: pointer;
-      font-size: 14px;
-      color: var(--muted);
-    }
+body{
+font-family:Inter,sans-serif;
+background:radial-gradient(1200px 600px at 20% -10%,#16204a,transparent),var(--bg);
+color:var(--text);
+min-height:100vh;
+}
 
-    .profile img {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      border: 2px solid var(--accent);
-      object-fit: cover;
-    }
+/* ================= TOP ================= */
 
-    header {
-      padding: 28px 40px;
-      border-bottom: 1px solid #1c2340;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+.top-bar{
+background:var(--panel2);
+padding:10px 40px;
+display:flex;
+justify-content:space-between;
+border-bottom:1px solid #1c2340;
+}
 
-    header h1 {
-      font-size: 22px;
-      font-weight: 600;
-    }
+.logo{font-size:20px;font-weight:600}
 
-    .budget {
-      background: var(--panel);
-      padding: 10px 16px;
-      border-radius: var(--radius);
-      display: flex;
-      gap: 10px;
-      font-size: 14px;
-      align-items: center;
-    }
+.profile{
+display:flex;
+gap:12px;
+align-items:center;
+color:var(--muted)
+}
 
-    .budget input {
-      background: transparent;
-      border: none;
-      color: var(--text);
-      width: 90px;
-      outline: none;
-      font-size: 14px;
-      text-align: right;
-    }
+.profile img{
+width:32px;height:32px;border-radius:50%;
+border:2px solid var(--accent)
+}
 
-    .nav-bar {
-      display: flex;
-      gap: 20px;
-      padding: 14px 40px;
-      background: var(--panel);
-      border-bottom: 1px solid #1c2340;
-    }
+/* ================= NAV ================= */
 
-    .nav-item {
-      text-decoration: none;
-      color: var(--muted);
-      font-size: 14px;
-      font-weight: 500;
-      padding: 6px 12px;
-      border-radius: 8px;
-      transition: 0.2s;
-    }
+.nav-bar{
+display:flex;
+gap:20px;
+padding:14px 40px;
+background:var(--panel);
+border-bottom:1px solid #1c2340;
+}
 
-    .nav-item:hover {
-      background: #1a2140;
-      color: var(--text);
-    }
+.nav-item{
+color:var(--muted);
+text-decoration:none;
+padding:6px 12px;
+border-radius:8px;
+}
 
-    .nav-item.active {
-      background: var(--accent);
-      color: white;
-    }
+.nav-item.active{
+background:var(--accent);
+color:#fff;
+}
 
-    main {
-      padding: 40px;
-      display: grid;
-      grid-template-columns: 2.5fr 1fr;
-      gap: 32px;
-    }
+/* ================= HEADER ================= */
 
-    .parts {
-      background: var(--panel);
-      border-radius: var(--radius);
-      padding: 28px;
-    }
+.header{
+padding:24px 40px;
+display:flex;
+justify-content:space-between;
+border-bottom:1px solid #1c2340;
+}
 
-    .parts h2 {
-      margin-bottom: 20px;
-      font-size: 18px;
-    }
+.budget{
+background:var(--panel);
+padding:8px 14px;
+border-radius:12px;
+}
 
-    .row {
-      display: grid;
-      grid-template-columns: 140px 1fr 120px;
-      gap: 16px;
-      padding: 14px 0;
-      border-bottom: 1px solid #1d2440;
-      align-items: center;
-      position: relative;
-    }
+.budget input{
+background:none;
+border:none;
+color:var(--text);
+width:90px;
+text-align:right;
+}
 
-    .label {
-      color: var(--muted);
-      font-size: 14px;
-      position: relative;
-      cursor: help;
-    }
+/* ================= LAYOUT ================= */
 
-    .label[data-tooltip]:hover::after {
-      content: attr(data-tooltip);
-      position: absolute;
-      bottom: 120%;
-      left: 0;
-      background: var(--panel-2);
-      color: var(--text);
-      padding: 6px 10px;
-      border-radius: 8px;
-      font-size: 12px;
-      white-space: nowrap;
-      box-shadow: 0 0 8px rgba(0,0,0,0.5);
-      z-index: 10;
-    }
+main{
+padding:40px;
+display:grid;
+grid-template-columns:2.6fr 1fr;
+gap:30px;
+}
 
-    select {
-      background: var(--panel-2);
-      border: 1px solid #222b52;
-      color: var(--text);
-      padding: 10px;
-      border-radius: 10px;
-      outline: none;
-      font-size: 14px;
-    }
+/* ================= PARTS ================= */
 
-    .price {
-      text-align: right;
-      color: var(--muted);
-      font-size: 14px;
-    }
+.parts,.summary{
+background:var(--panel);
+border-radius:14px;
+padding:26px;
+}
 
-    button {
-      margin-top: 20px;
-      width: 100%;
-      padding: 14px;
-      background: linear-gradient(135deg, #4f7cff, #6fa3ff);
-      border: none;
-      border-radius: 12px;
-      font-weight: 600;
-      color: white;
-      cursor: pointer;
-      font-size: 14px;
-      user-select: none;
-    }
+.row{
+display:grid;
+grid-template-columns:140px 1fr 120px;
+gap:14px;
+padding:12px 0;
+border-bottom:1px solid #1d2440;
+}
 
-    button:hover {
-      filter: brightness(1.1);
-    }
+.label{color:var(--muted)}
 
-    .summary {
-      background: var(--panel);
-      border-radius: var(--radius);
-      padding: 28px;
-      display: flex;
-      flex-direction: column;
-    }
+select{
+background:var(--panel2);
+border:1px solid #222b52;
+color:var(--text);
+padding:8px;
+border-radius:8px;
+}
 
-    .summary h2 {
-      margin-bottom: 20px;
-    }
+.price{text-align:right;color:var(--muted)}
 
-    .total {
-      display: flex;
-      justify-content: space-between;
-      font-size: 20px;
-      font-weight: 600;
-      margin-bottom: 16px;
-    }
+button{
+width:100%;
+margin-top:12px;
+padding:12px;
+border:none;
+border-radius:12px;
+font-weight:600;
+cursor:pointer;
+background:linear-gradient(135deg,#4f7cff,#6fa3ff);
+color:#fff;
+}
 
-    .status {
-      background: #13203f;
-      border: 1px solid #23336d;
-      padding: 12px;
-      border-radius: 10px;
-      font-size: 13px;
-      color: var(--muted);
-      margin-bottom: 20px;
-      white-space: pre-line;
-      min-height: 56px;
-    }
+button:hover{filter:brightness(1.1)}
 
-    .buttons-row {
-      display: flex;
-      gap: 12px;
-    }
+.row-btns{display:flex;gap:10px}
 
-    .buttons-row button {
-      width: 50%;
-      margin: 0;
-    }
+.clear{background:var(--danger)}
 
-    footer {
-      text-align: center;
-      padding: 20px;
-      font-size: 12px;
-      color: var(--muted);
-    }
+/* ================= SUMMARY ================= */
 
-    @media (max-width: 900px) {
-      main {
-        grid-template-columns: 1fr;
-      }
-      .buttons-row {
-        flex-direction: column;
-      }
-      .buttons-row button {
-        width: 100%;
-      }
-    }
-  </style>
+.total{
+display:flex;
+justify-content:space-between;
+font-size:20px;
+margin-bottom:12px;
+}
+
+.box{
+background:#13203f;
+border:1px solid #23336d;
+padding:12px;
+border-radius:10px;
+font-size:13px;
+white-space:pre-line;
+margin-bottom:12px;
+}
+
+</style>
 </head>
 
 <body>
 
-  <div class="top-bar">
-    <div class="profile">
-      <img src="https://i.pravatar.cc/32" />
-      Ahmed
-    </div>
-  </div>
+<!-- TOP -->
+<div class="top-bar">
+<div class="logo">PCPartsHub</div>
 
-  <header>
-    <h1>PCPartsHub</h1>
+<div class="profile">
+<img src="https://i.pravatar.cc/32">
+Ahmed
+</div>
+</div>
 
-    <div class="budget">
-      Budget DH
-      <input type="number" id="budgetInput" value="1200" min="0" />
-    </div>
-  </header>
+<!-- NAV -->
+<nav class="nav-bar">
+<a class="nav-item active">Builder</a>
+<a href="pcready.html" class="nav-item">Completed</a>
+<a href="graph.html" class="nav-item">Graphs</a>
+</nav>
 
-  <nav class="nav-bar">
-    <a href="index.html" class="nav-item active">Builder</a>
-    <a href="pcready.html" class="nav-item">Completed Builds</a>
-    <a href="graph.html" class="nav-item">Graphs</a>
-  </nav>
+<!-- HEADER -->
+<div class="header">
+<h2>Advanced PC Builder</h2>
 
-  <main>
-    <section class="parts">
+<div class="budget">
+Budget DH
+<input id="budget" type="number" value="15000">
+</div>
+</div>
 
-      <h2>Build Configuration</h2>
+<!-- MAIN -->
+<main>
 
-      <div class="row">
-        <div class="label" data-tooltip="Central Processing Unit - the brain of your PC.">CPU</div>
-        <select id="cpuSelect"></select>
-        <div class="price" id="cpuPrice">—</div>
-      </div>
+<!-- PARTS -->
+<section class="parts">
 
-      <div class="row">
-        <div class="label" data-tooltip="Mainboard that connects all components.">Motherboard</div>
-        <select id="mbSelect"></select>
-        <div class="price" id="mbPrice">—</div>
-      </div>
+<h3>Configuration</h3><br>
 
-      <div class="row">
-        <div class="label" data-tooltip="Graphics Processing Unit for visuals and gaming.">GPU</div>
-        <select id="gpuSelect"></select>
-        <div class="price" id="gpuPrice">—</div>
-      </div>
+<div class="row">
+<div class="label">CPU</div>
+<select id="cpu"></select>
+<div id="cpuP" class="price">—</div>
+</div>
 
-      <div class="row">
-        <div class="label" data-tooltip="Memory modules for running programs fast.">RAM</div>
-        <select id="ramSelect"></select>
-        <div class="price" id="ramPrice">—</div>
-      </div>
+<div class="row">
+<div class="label">Motherboard</div>
+<select id="mb"></select>
+<div id="mbP" class="price">—</div>
+</div>
 
-      <div class="row">
-        <div class="label" data-tooltip="Storage devices like SSD or HDD.">Storage</div>
-        <select id="storageSelect"></select>
-        <div class="price" id="storagePrice">—</div>
-      </div>
+<div class="row">
+<div class="label">GPU</div>
+<select id="gpu"></select>
+<div id="gpuP" class="price">—</div>
+</div>
 
-      <div class="row">
-        <div class="label" data-tooltip="Power Supply Unit - supplies power to components.">PSU</div>
-        <select id="psuSelect"></select>
-        <div class="price" id="psuPrice">—</div>
-      </div>
+<div class="row">
+<div class="label">RAM</div>
+<select id="ram"></select>
+<div id="ramP" class="price">—</div>
+</div>
 
-      <div class="row">
-        <div class="label" data-tooltip="PC Case - houses all your components.">Case</div>
-        <select id="caseSelect"></select>
-        <div class="price" id="casePrice">—</div>
-      </div>
+<div class="row">
+<div class="label">Storage</div>
+<select id="storage"></select>
+<div id="storageP" class="price">—</div>
+</div>
 
-      <button id="saveBuildBtn">Save Build</button>
+<div class="row">
+<div class="label">PSU</div>
+<select id="psu"></select>
+<div id="psuP" class="price">—</div>
+</div>
 
-    </section>
+<div class="row">
+<div class="label">Case</div>
+<select id="case"></select>
+<div id="caseP" class="price">—</div>
+</div>
 
-    <aside class="summary">
+<div class="row-btns">
+<button id="checkBtn">Check</button>
+<button id="saveBtn">Save</button>
+</div>
 
-      <h2>Summary</h2>
+<button class="clear" id="clearBtn">Clear</button>
 
-      <div class="total">
-        <span>Total</span>
-        <span id="totalPrice">0 DH</span>
-      </div>
+</section>
 
-      <div class="status" id="compatibilityStatus">
-        Compatibility: <span>—</span><br>
-        Power Draw: — W
-      </div>
+<!-- SUMMARY -->
+<aside class="summary">
 
-      <div class="buttons-row">
-        <button id="checkCompatBtn">Check Compatibility</button>
-        <button id="resetBuildBtn" style="background: var(--danger)">Clear Build</button>
-      </div>
+<h3>Summary</h3><br>
 
-    </aside>
+<div class="total">
+<span>Total</span>
+<span id="total">0 DH</span>
+</div>
 
-  </main>
+<div class="box" id="status">
+Compatibility: —
+</div>
 
-  <footer>
-    PCPartsHub — Builder Platform
-  </footer>
+<div class="box" id="power">
+Power: —
+</div>
 
-  <script>
-    (() => {
-      // Sample data with prices, socket types, power, and compatibility info
-      const partsData = {
-        cpu: [
-          { id: 'none', name: 'Select CPU', price: 0, socket: null, power: 0 },
-          { id: 'intel_i5', name: 'Intel i5-11400F', price: 1500, socket: 'LGA1200', power: 65 },
-          { id: 'intel_i7', name: 'Intel i7-11700K', price: 2800, socket: 'LGA1200', power: 125 },
-          { id: 'amd_ryzen5', name: 'AMD Ryzen 5 5600X', price: 2200, socket: 'AM4', power: 65 },
-          { id: 'amd_ryzen7', name: 'AMD Ryzen 7 5800X', price: 3500, socket: 'AM4', power: 105 },
-        ],
-        motherboard: [
-          { id: 'none', name: 'Select Motherboard', price: 0, socket: null, ramType: null },
-          { id: 'mb_asus_lga1200', name: 'ASUS Prime LGA1200', price: 1200, socket: 'LGA1200', ramType: 'DDR4' },
-          { id: 'mb_msi_am4', name: 'MSI Tomahawk AM4', price: 1300, socket: 'AM4', ramType: 'DDR4' },
-          { id: 'mb_gigabyte_lga1200', name: 'Gigabyte Ultra LGA1200', price: 1700, socket: 'LGA1200', ramType: 'DDR4' },
-          { id: 'mb_asrock_am4', name: 'ASRock B550 AM4', price: 1500, socket: 'AM4', ramType: 'DDR4' },
-        ],
-        gpu: [
-          { id: 'none', name: 'Select GPU', price: 0, power: 0 },
-          { id: 'nvidia_3060', name: 'NVIDIA RTX 3060', price: 3500, power: 170 },
-          { id: 'nvidia_3070', name: 'NVIDIA RTX 3070', price: 5000, power: 220 },
-          { id: 'amd_rx6600', name: 'AMD RX 6600', price: 3200, power: 160 },
-          { id: 'amd_rx6700', name: 'AMD RX 6700 XT', price: 4700, power: 230 },
-        ],
-        ram: [
-          { id: 'none', name: 'Select RAM', price: 0, type: null, size: null, power: 5 },
-          { id: 'corsair_16gb', name: 'Corsair 16GB DDR4', price: 800, type: 'DDR4', size: 16 },
-          { id: 'gskill_32gb', name: 'G.Skill 32GB DDR4', price: 1400, type: 'DDR4', size: 32 },
-          { id: 'kingston_8gb', name: 'Kingston 8GB DDR4', price: 500, type: 'DDR4', size: 8 },
-        ],
-        storage: [
-          { id: 'none', name: 'Select Storage', price: 0, type: null, power: 3 },
-          { id: 'samsung_1tb_ssd', name: 'Samsung 1TB SSD', price: 900, type: 'SSD' },
-          { id: 'wd_2tb_hdd', name: 'WD 2TB HDD', price: 700, type: 'HDD' },
-          { id: 'crucial_500gb_ssd', name: 'Crucial 500GB SSD', price: 600, type: 'SSD' },
-        ],
-        psu: [
-          { id: 'none', name: 'Select PSU', price: 0, wattage: 0 },
-          { id: 'corsair_550w', name: 'Corsair 550W', price: 600, wattage: 550 },
-          { id: 'evga_650w', name: 'EVGA 650W', price: 750, wattage: 650 },
-          { id: 'seasonic_750w', name: 'Seasonic 750W', price: 900, wattage: 750 },
-          { id: 'cooler_master_850w', name: 'Cooler Master 850W', price: 1100, wattage: 850 },
-        ],
-        case: [
-          { id: 'none', name: 'Select Case', price: 0 },
-          { id: 'nzxt_h510', name: 'NZXT H510', price: 700 },
-          { id: 'corsair_4000d', name: 'Corsair 4000D', price: 800 },
-          { id: 'fractal_define', name: 'Fractal Define 7', price: 1200 },
-        ],
-      };
+</aside>
 
-      // Elements
-      const selects = {
-        cpu: document.getElementById('cpuSelect'),
-        motherboard: document.getElementById('mbSelect'),
-        gpu: document.getElementById('gpuSelect'),
-        ram: document.getElementById('ramSelect'),
-        storage: document.getElementById('storageSelect'),
-        psu: document.getElementById('psuSelect'),
-        case: document.getElementById('caseSelect'),
-      };
+</main>
 
-      const priceEls = {
-        cpu: document.getElementById('cpuPrice'),
-        motherboard: document.getElementById('mbPrice'),
-        gpu: document.getElementById('gpuPrice'),
-        ram: document.getElementById('ramPrice'),
-        storage: document.getElementById('storagePrice'),
-        psu: document.getElementById('psuPrice'),
-        case: document.getElementById('casePrice'),
-      };
+<script>
 
-      const totalPriceEl = document.getElementById('totalPrice');
-      const compatibilityStatusEl = document.getElementById('compatibilityStatus');
-      const budgetInput = document.getElementById('budgetInput');
-      const saveBuildBtn = document.getElementById('saveBuildBtn');
-      const checkCompatBtn = document.getElementById('checkCompatBtn');
-      const resetBuildBtn = document.getElementById('resetBuildBtn');
+/* ================= DATA ================= */
 
-      // Helper: populate select
-      function populateSelect(selectEl, items) {
-        selectEl.innerHTML = '';
-        items.forEach(item => {
-          const option = document.createElement('option');
-          option.value = item.id;
-          option.textContent = item.name;
-          selectEl.appendChild(option);
-        });
-      }
+const data={
 
-      // Populate all selects
-      Object.entries(partsData).forEach(([key, items]) => {
-        populateSelect(selects[key], items);
-      });
+cpu:[
+{id:"none",n:"Select CPU",p:0,socket:null,w:0},
+{id:"i5_12400",n:"Intel i5-12400",p:1800,socket:"LGA1700",w:65},
+{id:"i7_12700",n:"Intel i7-12700K",p:3200,socket:"LGA1700",w:125},
+{id:"r5_5600",n:"Ryzen 5 5600",p:1700,socket:"AM4",w:65},
+{id:"r7_7700",n:"Ryzen 7 7700X",p:3800,socket:"AM5",w:105}
+],
 
-      // Get selected part object or null
-      function getSelectedPart(type) {
-        const id = selects[type].value;
-        return partsData[type].find(p => p.id === id) || null;
-      }
+mb:[
+{id:"none",n:"Select MB",p:0,socket:null,ram:null},
+{id:"b660",n:"MSI B660 (LGA1700 DDR4)",p:1400,socket:"LGA1700",ram:"DDR4"},
+{id:"z690",n:"ASUS Z690 (LGA1700 DDR5)",p:2200,socket:"LGA1700",ram:"DDR5"},
+{id:"b550",n:"Gigabyte B550 (AM4 DDR4)",p:1300,socket:"AM4",ram:"DDR4"},
+{id:"x670",n:"ASRock X670 (AM5 DDR5)",p:2600,socket:"AM5",ram:"DDR5"}
+],
 
-      // Update individual price display
-      function updatePrice(type) {
-        const part = getSelectedPart(type);
-        priceEls[type].textContent = part ? (part.price > 0 ? part.price + ' DH' : '—') : '—';
-      }
+gpu:[
+{id:"none",n:"Select GPU",p:0,w:0},
+{id:"rtx3060",n:"RTX 3060",p:3500,w:170},
+{id:"rtx4070",n:"RTX 4070",p:6500,w:200},
+{id:"rx6700",n:"RX 6700XT",p:4200,w:230},
+{id:"rx7800",n:"RX 7800XT",p:7000,w:260}
+],
 
-      // Update all prices
-      function updateAllPrices() {
-        Object.keys(partsData).forEach(updatePrice);
-      }
+ram:[
+{id:"none",n:"Select RAM",p:0,type:null,w:0},
+{id:"16ddr4",n:"16GB DDR4",p:700,type:"DDR4",w:5},
+{id:"32ddr4",n:"32GB DDR4",p:1200,type:"DDR4",w:7},
+{id:"16ddr5",n:"16GB DDR5",p:1200,type:"DDR5",w:6},
+{id:"32ddr5",n:"32GB DDR5",p:2000,type:"DDR5",w:8}
+],
 
-      // Calculate total price
-      function calculateTotal() {
-        let total = 0;
-        Object.keys(partsData).forEach(type => {
-          const part = getSelectedPart(type);
-          if (part) total += part.price;
-        });
-        return total;
-      }
+storage:[
+{id:"none",n:"Select Storage",p:0,w:0},
+{id:"ssd1",n:"NVMe SSD 1TB",p:900,w:5},
+{id:"ssd2",n:"NVMe SSD 2TB",p:1600,w:6},
+{id:"hdd2",n:"HDD 2TB",p:700,w:7}
+],
 
-      // Calculate total power draw
-      function calculatePowerDraw() {
-        let power = 0;
-        const cpu = getSelectedPart('cpu');
-        const gpu = getSelectedPart('gpu');
-        const ram = getSelectedPart('ram');
-        const storage = getSelectedPart('storage');
-        if (cpu) power += cpu.power || 0;
-        if (gpu) power += gpu.power || 0;
-        if (ram) power += ram.power || 0;
-        if (storage) power += storage.power || 0;
-        return power;
-      }
+psu:[
+{id:"none",n:"Select PSU",p:0,w:0},
+{id:"650",n:"650W Bronze",p:700,w:650},
+{id:"750",n:"750W Gold",p:1000,w:750},
+{id:"850",n:"850W Gold",p:1400,w:850}
+],
 
-      // Compatibility check
-      function checkCompatibility() {
-        const cpu = getSelectedPart('cpu');
-        const motherboard = getSelectedPart('motherboard');
-        const ram = getSelectedPart('ram');
-        const psu = getSelectedPart('psu');
+case:[
+{id:"none",n:"Select Case",p:0},
+{id:"nzxt",n:"NZXT H510",p:700},
+{id:"corsair",n:"Corsair 4000D",p:800},
+{id:"lianli",n:"Lian Li O11",p:1400}
+]
 
-        let issues = [];
+};
 
-        // CPU-MB socket match
-        if (cpu && motherboard && cpu.socket !== motherboard.socket) {
-          issues.push(`CPU socket (${cpu.socket || 'N/A'}) and Motherboard socket (${motherboard.socket || 'N/A'}) mismatch.`);
-        }
+const parts=["cpu","mb","gpu","ram","storage","psu","case"];
 
-        // RAM type match
-        if (motherboard && ram && motherboard.ramType !== ram.type) {
-          issues.push(`RAM type (${ram.type || 'N/A'}) incompatible with Motherboard RAM type (${motherboard.ramType || 'N/A'}).`);
-        }
+/* ================= INIT ================= */
 
-        // PSU wattage sufficient
-        const powerDraw = calculatePowerDraw();
-        if (psu && psu.wattage > 0 && powerDraw > psu.wattage) {
-          issues.push(`Power draw (${powerDraw}W) exceeds PSU wattage (${psu.wattage}W).`);
-        }
+parts.forEach(p=>{
+const s=document.getElementById(p);
+data[p].forEach(i=>{
+let o=document.createElement("option");
+o.value=i.id;
+o.textContent=i.n;
+s.appendChild(o);
+});
+});
 
-        // Budget check
-        const budget = Number(budgetInput.value) || 0;
-        const total = calculateTotal();
-        if (budget > 0 && total > budget) {
-          issues.push(`Build price (${total} DH) exceeds budget (${budget} DH).`);
-        }
+/* ================= HELPERS ================= */
 
-        // Build status message
-        if (issues.length === 0) {
-          compatibilityStatusEl.innerHTML = `Compatibility: <span style="color:#0f0;">No issues detected ✓</span>\nPower Draw: ${powerDraw} W`;
-        } else {
-          compatibilityStatusEl.innerHTML = `Compatibility: <span style="color: var(--danger);">Issues detected:</span>\n- ${issues.join('\n- ')}\nPower Draw: ${powerDraw} W`;
-        }
-      }
+function get(p){
+return data[p].find(i=>i.id===document.getElementById(p).value);
+}
 
-      // Update total price and price displays
-      function updateUI() {
-        updateAllPrices();
-        totalPriceEl.textContent = calculateTotal() + ' DH';
-      }
+function update(){
 
-      // Save build to localStorage
-      function saveBuild() {
-        const build = {};
-        Object.keys(partsData).forEach(type => {
-          build[type] = selects[type].value;
-        });
-        localStorage.setItem('pcBuild', JSON.stringify(build));
-        alert('Build saved locally.');
-      }
+let total=0;
+let power=0;
 
-      // Load build from localStorage
-      function loadBuild() {
-        const saved = localStorage.getItem('pcBuild');
-        if (saved) {
-          const build = JSON.parse(saved);
-          Object.entries(build).forEach(([type, id]) => {
-            if (selects[type].querySelector(`option[value="${id}"]`)) {
-              selects[type].value = id;
-            }
-          });
-        }
-      }
+parts.forEach(p=>{
+const i=get(p);
+const el=document.getElementById(p+"P");
 
-      // Reset build selections
-      function resetBuild() {
-        Object.keys(partsData).forEach(type => {
-          selects[type].value = 'none';
-        });
-        updateUI();
-        compatibilityStatusEl.innerHTML = `Compatibility: <span>—</span><br>Power Draw: — W`;
-      }
+if(i.p){
+el.textContent=i.p+" DH";
+total+=i.p;
+}else el.textContent="—";
 
-      // Event listeners
-      Object.values(selects).forEach(select => {
-        select.addEventListener('change', () => {
-          updateUI();
-          compatibilityStatusEl.innerHTML = `Compatibility: <span>—</span><br>Power Draw: — W`;
-        });
-      });
+if(i.w) power+=i.w;
+});
 
-      budgetInput.addEventListener('input', () => {
-        compatibilityStatusEl.innerHTML = `Compatibility: <span>—</span><br>Power Draw: — W`;
-      });
+totalEl.textContent=total+" DH";
+powerEl.textContent=power+" W";
 
-      saveBuildBtn.addEventListener('click', saveBuild);
-      checkCompatBtn.addEventListener('click', checkCompatibility);
-      resetBuildBtn.addEventListener('click', () => {
-        resetBuild();
-        localStorage.removeItem('pcBuild');
-      });
+return {total,power};
+}
 
-      // Init
-      loadBuild();
-      updateUI();
-    })();
-  </script>
+/* ================= CHECK ================= */
+
+function check(){
+
+const cpu=get("cpu");
+const mb=get("mb");
+const ram=get("ram");
+const psu=get("psu");
+
+const {total,power}=update();
+const budget=+budgetInput.value;
+
+let issues=[];
+
+/* Socket */
+if(cpu.socket && mb.socket && cpu.socket!==mb.socket)
+issues.push("CPU and Motherboard socket mismatch");
+
+/* RAM */
+if(mb.ram && ram.type && mb.ram!==ram.type)
+issues.push("RAM type incompatible");
+
+/* PSU */
+if(psu.w && power>psu.w*0.85)
+issues.push("PSU insufficient (no headroom)");
+
+/* Budget */
+if(total>budget)
+issues.push("Over budget");
+
+status.textContent=
+issues.length?
+"Issues:\n- "+issues.join("\n- "):
+"Compatible ✓";
+
+}
+
+/* ================= SAVE ================= */
+
+function save(){
+
+let b={};
+
+parts.forEach(p=>{
+b[p]=document.getElementById(p).value;
+});
+
+localStorage.setItem("pcBuildPro",JSON.stringify(b));
+alert("Saved");
+}
+
+function load(){
+
+const s=localStorage.getItem("pcBuildPro");
+if(!s) return;
+
+const b=JSON.parse(s);
+
+parts.forEach(p=>{
+if(b[p]) document.getElementById(p).value=b[p];
+});
+
+update();
+}
+
+/* ================= CLEAR ================= */
+
+function clearAll(){
+
+parts.forEach(p=>{
+document.getElementById(p).value="none";
+});
+
+update();
+
+status.textContent="Compatibility: —";
+power.textContent="Power: —";
+}
+
+/* ================= EVENTS ================= */
+
+const totalEl=document.getElementById("total");
+const powerEl=document.getElementById("power");
+const status=document.getElementById("status");
+const budgetInput=document.getElementById("budget");
+
+parts.forEach(p=>{
+document.getElementById(p).onchange=update;
+});
+
+checkBtn.onclick=check;
+saveBtn.onclick=save;
+clearBtn.onclick=clearAll;
+
+/* ================= START ================= */
+
+load();
+update();
+
+</script>
 
 </body>
 </html>
