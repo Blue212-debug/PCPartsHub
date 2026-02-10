@@ -639,45 +639,71 @@ main{
 /* ================= DATA (real product names) ================= */
 const data = {
   cpu:[
+    {id:"i3_12100", n:"Intel i3-12100", p:1200, socket:"LGA1700", w:60},
     {id:"i5_12400", n:"Intel i5-12400", p:1800, socket:"LGA1700", w:65},
     {id:"i7_12700", n:"Intel i7-12700K", p:3200, socket:"LGA1700", w:125},
-    {id:"r5_5600",  n:"Ryzen 5 5600",   p:1700, socket:"AM4",     w:65},
-    {id:"r7_7700",  n:"Ryzen 7 7700X",  p:3800, socket:"AM5",     w:105}
+    {id:"i9_12900", n:"Intel i9-12900K", p:5200, socket:"LGA1700", w:125},
+    {id:"r3_4100",  n:"Ryzen 3 4100", p:1000, socket:"AM4", w:65},
+    {id:"r5_5600",  n:"Ryzen 5 5600", p:1700, socket:"AM4", w:65},
+    {id:"r7_5800x", n:"Ryzen 7 5800X", p:2800, socket:"AM4", w:105},
+    {id:"r7_7700",  n:"Ryzen 7 7700X", p:3800, socket:"AM5", w:105},
+    {id:"r9_7950x", n:"Ryzen 9 7950X", p:7200, socket:"AM5", w:170}
   ],
   mb:[
-    {id:"b660", n:"MSI B660 (LGA1700 DDR4)",     p:1400, socket:"LGA1700", ram:"DDR4", w:25},
-    {id:"z690", n:"ASUS Z690 (LGA1700 DDR5)",    p:2200, socket:"LGA1700", ram:"DDR5", w:30},
-    {id:"b550", n:"Gigabyte B550 (AM4 DDR4)",    p:1300, socket:"AM4",     ram:"DDR4", w:22},
-    {id:"x670", n:"ASRock X670 (AM5 DDR5)",      p:2600, socket:"AM5",     ram:"DDR5", w:35}
+    {id:"b460", n:"MSI B460 (LGA1200 DDR4)", p:1100, socket:"LGA1200", ram:"DDR4", w:20},
+    {id:"b660", n:"MSI B660 (LGA1700 DDR4)", p:1400, socket:"LGA1700", ram:"DDR4", w:25},
+    {id:"z690", n:"ASUS Z690 (LGA1700 DDR5)", p:2200, socket:"LGA1700", ram:"DDR5", w:30},
+    {id:"x570", n:"Gigabyte X570 (AM4 DDR4)", p:1800, socket:"AM4", ram:"DDR4", w:30},
+    {id:"b550", n:"Gigabyte B550 (AM4 DDR4)", p:1300, socket:"AM4", ram:"DDR4", w:22},
+    {id:"x670", n:"ASRock X670 (AM5 DDR5)", p:2600, socket:"AM5", ram:"DDR5", w:35},
+    {id:"x470", n:"ASUS X470 (AM4 DDR4)", p:1400, socket:"AM4", ram:"DDR4", w:25},
+    {id:"z790", n:"MSI Z790 (LGA1700 DDR5)", p:3000, socket:"LGA1700", ram:"DDR5", w:35}
   ],
   gpu:[
-    {id:"rtx3060", n:"RTX 3060",  p:3500, w:170},
-    {id:"rtx4070", n:"RTX 4070",  p:6500, w:200},
-    {id:"rx6700",  n:"RX 6700XT", p:4200, w:230},
-    {id:"rx7800",  n:"RX 7800XT", p:7000, w:260}
+    {id:"gtx1650", n:"GTX 1650", p:2000, w:75},
+    {id:"rtx3050", n:"RTX 3050", p:3200, w:130},
+    {id:"rtx3060", n:"RTX 3060", p:3500, w:170},
+    {id:"rtx3070", n:"RTX 3070", p:4800, w:220},
+    {id:"rtx4070", n:"RTX 4070", p:6500, w:200},
+    {id:"rx6600",  n:"RX 6600 XT", p:3000, w:160},
+    {id:"rx6700",  n:"RX 6700 XT", p:4200, w:230},
+    {id:"rx7800",  n:"RX 7800 XT", p:7000, w:260},
+    {id:"rx7900",  n:"RX 7900 XT", p:8500, w:300}
   ],
   ram:[
+    {id:"8ddr4",  n:"8GB DDR4",  p:400,  type:"DDR4", w:3},
     {id:"16ddr4", n:"16GB DDR4", p:700,  type:"DDR4", w:5},
     {id:"32ddr4", n:"32GB DDR4", p:1200, type:"DDR4", w:7},
     {id:"16ddr5", n:"16GB DDR5", p:1200, type:"DDR5", w:6},
-    {id:"32ddr5", n:"32GB DDR5", p:2000, type:"DDR5", w:8}
+    {id:"32ddr5", n:"32GB DDR5", p:2000, type:"DDR5", w:8},
+    {id:"64ddr5", n:"64GB DDR5", p:3800, type:"DDR5", w:10}
   ],
   storage:[
-    {id:"ssd1", n:"NVMe SSD 1TB", p:900,  w:5},
-    {id:"ssd2", n:"NVMe SSD 2TB", p:1600, w:6},
-    {id:"hdd2", n:"HDD 2TB",      p:700,  w:7}
+    {id:"ssd500",  n:"NVMe SSD 500GB", p:600,  w:4},
+    {id:"ssd1",    n:"NVMe SSD 1TB",   p:900,  w:5},
+    {id:"ssd2",    n:"NVMe SSD 2TB",   p:1600, w:6},
+    {id:"hdd1",    n:"HDD 1TB",        p:400,  w:7},
+    {id:"hdd2",    n:"HDD 2TB",        p:700,  w:7},
+    {id:"sshddcombo", n:"1TB SSD + 2TB HDD", p:1400, w:12}
   ],
   psu:[
+    {id:"550", p:"550W Bronze", p:550, psuW:550},
     {id:"650", n:"650W Bronze", p:700,  psuW:650},
     {id:"750", n:"750W Gold",   p:1000, psuW:750},
-    {id:"850", n:"850W Gold",   p:1400, psuW:850}
+    {id:"850", n:"850W Gold",   p:1400, psuW:850},
+    {id:"1000", n:"1000W Platinum", p:2000, psuW:1000}
   ],
   case:[
-    {id:"nzxt",    n:"NZXT H510",      p:700,  w:0},
-    {id:"corsair", n:"Corsair 4000D",  p:800,  w:0},
-    {id:"lianli",  n:"Lian Li O11",    p:1400, w:0}
+    {id:"nzxt",    n:"NZXT H510",       p:700,  w:0},
+    {id:"corsair", n:"Corsair 4000D",   p:800,  w:0},
+    {id:"lianli",  n:"Lian Li O11",     p:1400, w:0},
+    {id:"coolermaster", n:"Cooler Master NR600", p:600, w:0},
+    {id:"phanteks", n:"Phanteks Eclipse P400A", p:900, w:0},
+    {id:"fractal",  n:"Fractal Design Meshify C", p:850, w:0}
   ]
 };
+
+
 
 /* ================= HELPERS ================= */
 function getBrand(name){
